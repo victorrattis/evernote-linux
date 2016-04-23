@@ -1,45 +1,39 @@
 var React = require('react');
 
-var NoteSnippetView = require('./note-snippet-view');
-var NoteStore = require('../note-store');
+var SideBar = require('./side-bar');
+var Content = require('./content');
+
+var style = {
+    width: "100%",
+    height: '100%',
+    position: 'relative',
+    overflow: 'hidden',
+};
+
+var style2= {
+    background: "#868686",
+    width: "100%",
+    height: '100%',
+    position: 'relative',
+    overflow: 'hidden',
+};
 
 var Container = React.createClass({
     displayName: 'Container',
 
-    getInitialState: function() {
-        return {
-            notes: []
-        };
-    },
-
-    componentDidMount: function() {
-        NoteStore.addChangeListener(this._onChange);
-    },
-
-    _onChange: function() {
-        this.setState({ notes: NoteStore.getNotes() });
-    },
-
-    render: function() {
-        var notes = this.state.notes;
+    render() {
         return (
-            <div className='container' >
-                {notes.map(createNoteItem)}
+            <div style={style} >
+                <div style={style2}>
+                    <SideBar />
+                    <Content />
+                </div>
             </div>
         );
     }
 });
 
-var createNoteItem = function(item, index) {
-    return (  
-        <NoteSnippetView
-            key={index}
-            title={item.title}
-            date={item.date}
-            snippet={item.snippet}
-            thumbnail={item.thumbnail}
-            />
-    );
-};
+ // <SideBar />
+ // <Content />
 
 module.exports = Container;

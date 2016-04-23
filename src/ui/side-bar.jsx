@@ -11,7 +11,8 @@ var sidebarStyle = {
     background: "#F8F8F8",
     padding: "12px 12px 24px 17px",
     zIndex: 200,
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    overflow: 'hidden',
 };
 
 
