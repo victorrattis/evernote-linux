@@ -23,7 +23,7 @@ var Container = React.createClass({
     render: function() {
         var notes = this.state.notes;
         return (
-            <div className='container' >
+            <div className='container'>
                 {notes.map(createNoteItem)}
             </div>
         );

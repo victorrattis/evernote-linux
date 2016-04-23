@@ -1,39 +1,54 @@
 var React = require('react');
 
-var SideBar = require('./side-bar');
+var Sidebar = require('./sidebar');
 var Content = require('./content');
 
 var style = {
-    width: "100%",
-    height: '100%',
-    position: 'relative',
-    overflow: 'hidden',
-};
+    /*
+     Container Inline Style
+     */
+    container: {
+        width: "100%",
+        height: '100%',
+        overflow: 'hidden',
+    },
 
-var style2= {
-    background: "#868686",
-    width: "100%",
-    height: '100%',
-    position: 'relative',
-    overflow: 'hidden',
+    /*
+     Sidebar Area Inline Style
+     Defines the area where will insert the Sidebar Component.
+     */
+    sidebar: {
+        height: '100%',
+        float:"left",
+        display: 'inline-block',
+        overflow: 'hidden',
+    },
+
+    /*
+     Content Area Inline Style
+     Defines the area where will insert the Content Component.
+     */
+    content: {
+        height: '100%',
+        overflow: 'hidden',
+    }
 };
 
 var Container = React.createClass({
     displayName: 'Container',
 
-    render() {
+    render: function() {
         return (
-            <div style={style} >
-                <div style={style2}>
-                    <SideBar />
+            <div style={style.container} >
+                <div style={style.sidebar}>
+                    <Sidebar />
+                </div>
+                <div style={style.content}>
                     <Content />
                 </div>
             </div>
         );
     }
 });
-
- // <SideBar />
- // <Content />
 
 module.exports = Container;

@@ -17,7 +17,7 @@ var style = {
     },
 
     /*
-     Header Inline Style
+     Header Area Inline Style
      Defines the area where will insert the Header component.
      */
     header: {
@@ -29,7 +29,7 @@ var style = {
     },
 
     /*
-     Container Inline Style
+     Container Area Inline Style
      Defines the area where will insert the Container compoenent.
      */
     container: {

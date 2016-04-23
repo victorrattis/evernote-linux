@@ -23,7 +23,7 @@ var SideBar = React.createClass({
         AppActions.change();
     },
 
-    render() {
+    render: function() {
         return (
             <div style={sidebarStyle} >
                 <div className="logo" >
