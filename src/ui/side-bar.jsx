@@ -1,6 +1,7 @@
 
 var React = require('react');
 var IconeButton = require('./icone-button');
+var AppActions = require('../app-action');
 
 var sidebarStyle = {
     borderRight: "1px solid #ececec",
@@ -16,6 +17,10 @@ var sidebarStyle = {
 
 var SideBar = React.createClass({
     displayName: 'SideBar',
+
+    _onChange: function() {
+        AppActions.change();
+    },
 
     render() {
         return (
@@ -40,7 +45,8 @@ var SideBar = React.createClass({
                         action="SHOW_SHORCUTS_ACTION"/>
                     <IconeButton imgNormal="../../resources/note-normal.png"
                         imgOver="../../resources/note-over.png"
-                        action="SHOW_NOTES_ACTION"/>
+                        action="SHOW_NOTES_ACTION"
+                        onClick={this._onChange}/>
                     <IconeButton imgNormal="../../resources/notebook-normal.png"
                         imgOver="../../resources/notebook-over.png"
                         action="SHOW_NOTEBOOKS_ACTION"/>

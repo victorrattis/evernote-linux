@@ -23,7 +23,9 @@ var IconeButton = React.createClass({
     },
 
     mouseClick: function() {
-        console.log("action: " + this.props.action);
+        if(this.props.onClick != undefined) {
+            this.props.onClick();
+        }
     },
 
     render: function() {
