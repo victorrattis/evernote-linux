@@ -1,0 +1,55 @@
+
+
+A ideia é criar pequenos entregaveis, coisas que precisam ser feitas, para melhorar o gerenciamento.
+
+Project:
+
+
+
+
+Starting project:
+
+ ✔ Create project on github  @done (16-04-22 21:30)
+ ✔ First commit on project @done (16-04-22 21:30)
+
+
+Project structure:
+
+  ☐ Search how organize the files in a react project
+
+
+UI Component:
+
+ ✔ Create app layout structure: app, header and container @done (16-04-23 19:48)
+ ✔ Create container layout structure: sidebar and content @done (16-04-23 20:57)
+ ✔ Disable drag action of the sidebar item @done (16-04-24 00:39)
+ ✔ Create layout sidebar component @done (16-04-24 01:10)
+ ☐ Create note preview component
+ ☐ Create scroll component of notes
+ ☐ Create view component of notebooks
+ ☐ Create view component of tags
+ ☐ Define max and min value to screen size
+ ☐ Create header component
+ ☐ Create content component of notes
+ ☐ Create content component of notebooks
+ ☐ Create content component of tags
+
+
+
+UI Component Behavior:
+
+ ✔ Implement sidebar UI behavior @done (16-04-23 23:25)
+ ☐ Implement action to select a note on note scroll
+
+
+Internal behavior - using flux:
+
+ ✔ Implement flux of the notes - initial @done (16-04-23 15:13)
+ ☐ Implement flux of the notebook - initial
+ ☐ Implement flux of the tags - initial
+
+
+
+
+
+
