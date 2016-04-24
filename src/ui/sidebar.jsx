@@ -26,6 +26,10 @@ var style = {
     unselectable: {
         WebkitUserDrag: 'none',
         WebkitUserSelect: 'none'
+    },
+
+    group: {
+        marginBottom: '48px'
     }
 };
 
@@ -46,9 +50,10 @@ var SideBar = React.createClass({
         return (
             <div style={style.sidebar} >
                 <div style={style.logo} >
-                    <img style={style.unselectable} src="../../resources/evernote-logo1.png" />
+                    <img style={style.unselectable}
+                        src="../../resources/evernote-logo1.png" />
                 </div>
-                <div className="sidebar-icones1" >
+                <div style={style.group} >
                     <SidebarItem imgNormal="../../resources/new-note-normal.png"
                         imgOver="../../resources/new-note-over.png"
                         imgSelected="../../resources/new-note-clicked.png"
@@ -65,7 +70,7 @@ var SideBar = React.createClass({
                         action="SHOW_WORK_CHAT_ACTION"
                         onItemSelected={this.onItemSelected} />
                 </div>
-                <div className="sidebar-icones2" >
+                <div style={style.group} >
                     <SidebarItem imgNormal="../../resources/shortcut-normal.png"
                         imgOver="../../resources/shortcut-over.png"
                         imgSelected="../../resources/shortcut-clicked.png"
