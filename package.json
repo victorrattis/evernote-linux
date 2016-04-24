@@ -4,7 +4,7 @@
   "description": "",
   "main": "./out/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "standard"
   },
   "author": "victor rattis",
   "license": "ISC",
@@ -22,6 +22,7 @@
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.0",
     "gulp-less": "^3.0.5",
-    "gulp-run": "^1.6.12"
+    "gulp-run": "^1.6.12",
+    "standard": "^6.0.8"
   }
 }

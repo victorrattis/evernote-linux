@@ -1,64 +1,62 @@
-'use strict';
-var React = require('react');
+const React = require('react')
 
-var divStyle = {
+const style = {
+  unselectable: {
+    WebkitUserDrag: 'none',
+    WebkitUserSelect: 'none'
+  },
+  div: {
     height: 48,
     WebkitUserDrag: 'none',
     WebkitUserSelect: 'none'
-};
+  }
+}
 
-var style = {
-    unselectable: {
-        WebkitUserDrag: 'none',
-        WebkitUserSelect: 'none'
+let SidebarItem = React.createClass({
+  displayName: 'SidebarItem',
+
+  getInitialState: function () {
+    return {
+      isOver: false,
+      isClicked: false
     }
-};
+  },
 
-var SidebarItem = React.createClass({
-    displayName: 'SidebarItem',
+  unmarks: function () {
+    this.setState({ isClicked: false })
+  },
 
-    getInitialState: function() {
-        return {
-            isOver: false,
-            isClicked: false
-        };
-    },
+  mouseOver: function () {
+    this.setState({ isOver: true })
+  },
 
-    unmarks: function() {
-        this.setState({ isClicked: false });
-    },
+  mouseOut: function () {
+    this.setState({ isOver: false })
+  },
 
-    mouseOver: function() {
-        this.setState({ isOver: true });
-    },
+  mouseClick: function () {
+    this.setState({ isClicked: true })
 
-    mouseOut: function() {
-        this.setState({ isOver: false });
-    },
-
-    mouseClick: function() {
-        this.setState({ isClicked: true });
-
-        if(this.props.onItemSelected != undefined) {
-            this.props.onItemSelected(this);
-        }
-    },
-
-    render: function() {
-        // The over state overlaps the other states.
-        var imageSource = this.state.isOver ? 
-                            this.props.imgOver : 
-                            (this.state.isClicked ? this.props.imgSelected : this.props.imgNormal);
-
-        return (
-            <div style={divStyle} draggable="false" >
-                <img style={style.unselectable} src={imageSource}
-                    onMouseOver={this.mouseOver}
-                    onMouseOut={this.mouseOut}
-                    onClick={this.mouseClick} />
-            </div>
-        );
+    if (this.props.onItemSelected !== undefined) {
+      this.props.onItemSelected(this)
     }
-});
+  },
 
-module.exports = SidebarItem;
+  render: function () {
+    // The over state overlaps the other states.
+    var imageSource = this.state.isOver ? this.props.imgOver : this.state.isClicked ? this.props.imgSelected : this.props.imgNormal
+
+    return (
+      <div style={style.div}>
+        <img
+          style={style.unselectable}
+          src={imageSource}
+          onMouseOver={this.mouseOver}
+          onMouseOut={this.mouseOut}
+          onClick={this.mouseClick} />
+      </div>
+    )
+  }
+})
+
+module.exports = SidebarItem

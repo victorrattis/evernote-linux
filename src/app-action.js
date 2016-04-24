@@ -1,14 +1,11 @@
+const AppDispatcher = require('./app-dispatcher')
 
-var AppDispatcher = require('./app-dispatcher');
+let AppActions = {
+  change: function () {
+    AppDispatcher.dispatch({
+      actionType: 'CHANGE_ACTION'
+    })
+  }
+}
 
-var AppActions = {
-
-    change: function() {
-        AppDispatcher.dispatch({
-            actionType: "CHANGE_ACTION"
-        });
-    }
-
-};
-
-module.exports = AppActions;
+module.exports = AppActions

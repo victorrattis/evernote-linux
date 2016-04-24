@@ -2,10 +2,6 @@
 
 A ideia é criar pequenos entregaveis, coisas que precisam ser feitas, para melhorar o gerenciamento.
 
-Project:
-
-
-
 
 Starting project:
 
@@ -13,9 +9,15 @@ Starting project:
  ✔ First commit on project @done (16-04-22 21:30)
 
 
-Project structure:
+Project:
 
-  ☐ Search how organize the files in a react project
+
+
+Project Design:
+
+ ✔ Use Code Style of the Electron documentation @done (16-04-24 13:34)
+ ☐ Search how organize the files in a react project
+ ☐ Search how organize the inline style of the components, to inner
 
 
 UI Component:
@@ -24,8 +26,8 @@ UI Component:
  ✔ Create container layout structure: sidebar and content @done (16-04-23 20:57)
  ✔ Disable drag action of the sidebar item @done (16-04-24 00:39)
  ✔ Create layout sidebar component @done (16-04-24 01:10)
- ☐ Create note preview component
  ☐ Create scroll component of notes
+ ☐ Create note preview component
  ☐ Create view component of notebooks
  ☐ Create view component of tags
  ☐ Define max and min value to screen size

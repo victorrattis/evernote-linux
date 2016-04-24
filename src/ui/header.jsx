@@ -1,29 +1,29 @@
-var React = require('react');
+const React = require('react')
 
-var style = {
-    width: "100%",
-    height: '73px',
-    background: "#F8F8F8",
-    borderBottom: "1px solid #ececec",
-    margin: '0',
-    position: 'relative',
-    overflow: 'hidden',
-};
+const style = {
+  width: '100%',
+  height: '73px',
+  background: '#F8F8F8',
+  borderBottom: '1px solid #ececec',
+  margin: '0',
+  position: 'relative',
+  overflow: 'hidden'
+}
 
-var textStyle = {
-    textAlign: 'center',
-};
+let textStyle = {
+  textAlign: 'center'
+}
 
-var Header = React.createClass({
-    displayName: 'Header',
+let Header = React.createClass({
+  displayName: 'Header',
 
-    render() {
-        return (
-            <div style={style}>
-                <h1 style={textStyle}> Header </h1>
-            </div>
-        );
-    }
-});
+  render: function () {
+    return (
+      <div style={style}>
+        <h1 style={textStyle}>Header</h1>
+      </div>
+    )
+  }
+})
 
-module.exports = Header;
+module.exports = Header
