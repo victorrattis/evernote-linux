@@ -1,59 +1,79 @@
 
 var React = require('react');
-var IconeButton = require('./icone-button');
+var SidebarItem = require('./sidebar-item');
 var AppActions = require('../app-action');
 
-var sidebarStyle = {
-    borderRight: "1px solid #ececec",
-    float:"left",
-    width: "73px",
-    height:"100%",
-    background: "#F8F8F8",
-    padding: "12px 12px 24px 17px",
-    zIndex: 200,
-    boxSizing: "border-box",
-    overflow: 'hidden',
+var style = {
+    sidebar: {
+        borderRight: "1px solid #ececec",
+        float:"left",
+        width: "73px",
+        height:"100%",
+        background: "#F8F8F8",
+        padding: "12px 12px 24px 17px",
+        zIndex: 200,
+        boxSizing: "border-box",
+        overflow: 'hidden',
+    }
 };
 
+var previousItem = undefined;
 
 var SideBar = React.createClass({
     displayName: 'SideBar',
 
-    _onChange: function() {
+    onItemSelected: function(item) {
         AppActions.change();
+        if(previousItem != undefined) {
+            previousItem.unmarks();
+        }
+        previousItem = item;
     },
 
     render: function() {
         return (
-            <div style={sidebarStyle} >
+            <div style={style.sidebar} >
                 <div className="logo" >
                     <img src="../../resources/evernote-logo1.png" />
                 </div>
                 <div className="sidebar-icones1" >
-                    <IconeButton imgNormal="../../resources/new-note-normal.png"
+                    <SidebarItem imgNormal="../../resources/new-note-normal.png"
                         imgOver="../../resources/new-note-over.png"
-                        action="NEW_NOTE_ACTION"/>
-                    <IconeButton imgNormal="../../resources/search-normal.png"
+                        imgSelected="../../resources/new-note-clicked.png"
+                        action="NEW_NOTE_ACTION"
+                        onItemSelected={this.onItemSelected} />
+                    <SidebarItem imgNormal="../../resources/search-normal.png"
                         imgOver="../../resources/search-over.png"
-                        action="SEARCH_ACTION"/>
-                    <IconeButton imgNormal="../../resources/work-chat-normal.png"
+                        imgSelected="../../resources/search-clicked.png"
+                        action="SEARCH_ACTION"
+                        onItemSelected={this.onItemSelected} />
+                    <SidebarItem imgNormal="../../resources/work-chat-normal.png"
                         imgOver="../../resources/work-chat-over.png"
-                        action="SHOW_WORK_CHAT_ACTION"/>
+                        imgSelected="../../resources/work-chat-clicked.png"
+                        action="SHOW_WORK_CHAT_ACTION"
+                        onItemSelected={this.onItemSelected} />
                 </div>
                 <div className="sidebar-icones2" >
-                    <IconeButton imgNormal="../../resources/shorcut-normal.png"
-                        imgOver="../../resources/shorcut-over.png"
-                        action="SHOW_SHORCUTS_ACTION"/>
-                    <IconeButton imgNormal="../../resources/note-normal.png"
+                    <SidebarItem imgNormal="../../resources/shortcut-normal.png"
+                        imgOver="../../resources/shortcut-over.png"
+                        imgSelected="../../resources/shortcut-clicked.png"
+                        action="SHOW_SHORCUTS_ACTION"
+                        onItemSelected={this.onItemSelected} />
+                    <SidebarItem imgNormal="../../resources/note-normal.png"
                         imgOver="../../resources/note-over.png"
+                        imgSelected="../../resources/note-clicked.png"
                         action="SHOW_NOTES_ACTION"
-                        onClick={this._onChange}/>
-                    <IconeButton imgNormal="../../resources/notebook-normal.png"
+                        onItemSelected={this.onItemSelected} />
+                    <SidebarItem imgNormal="../../resources/notebook-normal.png"
                         imgOver="../../resources/notebook-over.png"
-                        action="SHOW_NOTEBOOKS_ACTION"/>
-                    <IconeButton imgNormal="../../resources/tag-normal.png"
+                        imgSelected="../../resources/notebook-clicked.png"
+                        action="SHOW_NOTEBOOKS_ACTION"
+                        onItemSelected={this.onItemSelected} />
+                    <SidebarItem imgNormal="../../resources/tag-normal.png"
                         imgOver="../../resources/tag-over.png"
-                        action="SHOW_TAGS_ACTION"/>
+                        imgSelected="../../resources/tag-clicked.png"
+                        action="SHOW_TAGS_ACTION"
+                        onItemSelected={this.onItemSelected} />
                 </div>
             </div>
         );
