@@ -2,11 +2,16 @@
 var React = require('react');
 
 var divStyle = {
-    height: 48
+    height: 48,
+    WebkitUserDrag: 'none',
+    WebkitUserSelect: 'none'
 };
 
 var style = {
-
+    unselectable: {
+        WebkitUserDrag: 'none',
+        WebkitUserSelect: 'none'
+    }
 };
 
 var SidebarItem = React.createClass({
@@ -47,7 +52,7 @@ var SidebarItem = React.createClass({
 
         return (
             <div style={divStyle} draggable="false" >
-                <img src={imageSource}
+                <img style={style.unselectable} src={imageSource}
                     onMouseOver={this.mouseOver}
                     onMouseOut={this.mouseOut}
                     onClick={this.mouseClick} />

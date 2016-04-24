@@ -5,15 +5,27 @@ var AppActions = require('../app-action');
 
 var style = {
     sidebar: {
-        borderRight: "1px solid #ececec",
-        float:"left",
-        width: "73px",
-        height:"100%",
-        background: "#F8F8F8",
-        padding: "12px 12px 24px 17px",
+        borderRight: '1px solid #ececec',
+        float: 'left',
+        width: '73px',
+        height: '100%',
+        background: '#F8F8F8',
+        padding: '12px 12px 24px 17px',
         zIndex: 200,
-        boxSizing: "border-box",
+        boxSizing: 'border-box',
         overflow: 'hidden',
+        WebkitUserDrag: 'none',
+        WebkitUserSelect: 'none',
+        cursor: 'default',
+    },
+
+    logo: {
+        height: '66px'
+    },
+
+    unselectable: {
+        WebkitUserDrag: 'none',
+        WebkitUserSelect: 'none'
     }
 };
 
@@ -33,8 +45,8 @@ var SideBar = React.createClass({
     render: function() {
         return (
             <div style={style.sidebar} >
-                <div className="logo" >
-                    <img src="../../resources/evernote-logo1.png" />
+                <div style={style.logo} >
+                    <img style={style.unselectable} src="../../resources/evernote-logo1.png" />
                 </div>
                 <div className="sidebar-icones1" >
                     <SidebarItem imgNormal="../../resources/new-note-normal.png"
