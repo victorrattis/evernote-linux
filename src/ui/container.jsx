@@ -18,6 +18,7 @@ const style = {
    Defines the area where will insert the Sidebar Component.
    */
   sidebar: {
+    width: 'auto',
     height: '100%',
     float: 'left',
     display: 'inline-block',
@@ -30,6 +31,7 @@ const style = {
    */
   content: {
     height: '100%',
+    width: 'calc(100% - 73px)',
     overflow: 'hidden'
   }
 }

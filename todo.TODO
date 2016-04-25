@@ -26,13 +26,13 @@ UI Component:
  ✔ Create container layout structure: sidebar and content @done (16-04-23 20:57)
  ✔ Disable drag action of the sidebar item @done (16-04-24 00:39)
  ✔ Create layout sidebar component @done (16-04-24 01:10)
+ ✔ Create content component of notes @done (16-04-24 21:04)
  ☐ Create scroll component of notes
  ☐ Create note preview component
  ☐ Create view component of notebooks
  ☐ Create view component of tags
  ☐ Define max and min value to screen size
  ☐ Create header component
- ☐ Create content component of notes
  ☐ Create content component of notebooks
  ☐ Create content component of tags
 
@@ -51,6 +51,9 @@ Internal behavior - using flux:
  ☐ Implement flux of the tags - initial
 
 
+BUG:
+
+ ☐ scroll of notes fades away after of a screen resize
 
 
 

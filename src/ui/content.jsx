@@ -1,44 +1,27 @@
 const React = require('react')
 
-const NoteSnippetView = require('./note-snippet-view')
-const NoteStore = require('../note-store')
+const ContentNotes = require('./content-notes')
 
-let Container = React.createClass({
-  displayName: 'Container',
+const style = {
+  content: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    background: '#fff',
+    overflow: 'hidden'
+  }
+}
 
-  getInitialState: function () {
-    return {
-      notes: []
-    }
-  },
-
-  componentDidMount: function () {
-    NoteStore.addChangeListener(this._onChange)
-  },
-
-  _onChange: function () {
-    this.setState({ notes: NoteStore.getNotes() })
-  },
+let Content = React.createClass({
+  displayName: 'Content',
 
   render: function () {
-    var notes = this.state.notes
     return (
-      <div className='container'>
-        {notes.map(createNoteItem)}
+      <div style={style.content}>
+        <ContentNotes />
       </div>
     )
   }
 })
 
-let createNoteItem = function (item, index) {
-  return (
-    <NoteSnippetView
-      key={index}
-      title={item.title}
-      date={item.date}
-      snippet={item.snippet}
-      thumbnail={item.thumbnail} />
-  )
-}
-
-module.exports = Container
+module.exports = Content
