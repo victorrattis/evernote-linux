@@ -1,3 +1,4 @@
+'use strict'
 const React = require('react')
 const SidebarItem = require('./sidebar-item')
 const AppActions = require('../app-action')

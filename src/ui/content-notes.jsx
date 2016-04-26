@@ -1,3 +1,4 @@
+'use strict'
 const React = require('react')
 
 const NoteSnippetView = require('./note-snippet-view')

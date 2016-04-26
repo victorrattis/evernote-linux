@@ -1,3 +1,4 @@
+'use strict'
 const AppDispatcher = require('./app-dispatcher')
 
 let AppActions = {

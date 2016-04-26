@@ -1,3 +1,4 @@
+'use strict'
 const React = require('react')
 const ReactDOM = require('react-dom')
 const SplitPane = require('react-split-pane')
