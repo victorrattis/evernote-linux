@@ -6,7 +6,7 @@ const NoteStore = require('../note-store')
 const style = {
   content: {
     position: 'relative',
-    float: 'left',
+    // float: 'left',
     width: '350px',
     height: '100%',
     display: 'table',

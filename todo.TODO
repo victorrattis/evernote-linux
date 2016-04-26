@@ -35,7 +35,7 @@ UI Component:
  ☐ Create header component
  ☐ Create content component of notebooks
  ☐ Create content component of tags
-
+ ✔ Use the react split-pane component to create the app and container layout @done (16-04-25 23:24)
 
 
 UI Component Behavior:
