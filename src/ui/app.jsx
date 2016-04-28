@@ -9,7 +9,7 @@ const Header = require('./header')
 let App = React.createClass({
   render: function () {
     return (
-      <SplitPane split='horizontal' defaultSize={'auto'} className='primary'>
+      <SplitPane split='horizontal' defaultSize={'auto'}>
         <Header />
         <Container />
       </SplitPane>

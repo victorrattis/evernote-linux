@@ -1,41 +1,30 @@
 'use strict'
+
 const React = require('react')
+const SplitPane = require('react-split-pane')
 
 const NoteSnippetView = require('./note-snippet-view')
+const NoteView = require('./note-view')
+const NoteHeader = require('./note-header')
 const NoteStore = require('../note-store')
 
 const style = {
-  content: {
-    position: 'relative',
-    // float: 'left',
-    width: '350px',
-    height: '100%',
-    display: 'table',
-    overflow: 'hidden',
-    borderRight: '1px solid #ececec'
-  },
-
-  header: {
-    width: '100%',
-    height: '100px',
-    position: 'relative',
-    display: 'table-row',
-    overflow: 'hidden'
-  },
+  // content: {
+  //   // position: 'relative',
+  //   // float: 'left',
+  //   width: '350px',
+  //   height: '100%',
+  //   display: 'table',
+  //   overflow: 'hidden',
+  //   borderRight: '1px solid #ececec'
+  // },
 
   scrollNotes: {
     width: '100%',
     height: '100%',
-    position: 'relative',
+    position: 'absolute',
     overflowX: 'hidden',
-    overflowY: 'scroll'
-  },
-
-  test2: {
-    position: 'relative',
-    height: 'auto',
-    width: '100%',
-    display: 'table-row'
+    overflowY: 'auto'
   }
 }
 
@@ -58,17 +47,17 @@ let Container = React.createClass({
 
   render: function () {
     var notes = this.state.notes
+
     return (
-      <div style={style.content}>
-        <div style={style.header}>
-          <h1 style={{textAlign: 'center'}}>Header Notes</h1>
-        </div>
-        <div style={style.test2}>
+      <SplitPane split='vertical' defaultSize={'350px'}>
+        <SplitPane split='horizontal' defaultSize={'100px'}>
+          <NoteHeader />
           <div style={style.scrollNotes}>
-              {notes.map(createNoteItem)}
+            {notes.map(createNoteItem)}
           </div>
-        </div>
-      </div>
+        </SplitPane>
+        <NoteView />
+      </SplitPane>
     )
   }
 })

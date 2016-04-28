@@ -11,7 +11,7 @@ Starting project:
 
 Project:
 
-
+ ✔ Change electron prebuilt version to a stable version @done (16-04-26 00:06)
 
 Project Design:
 
@@ -51,9 +51,14 @@ Internal behavior - using flux:
  ☐ Implement flux of the tags - initial
 
 
+Code Refactoring:
+
+  ☐ Refactoring the content notes to use react split-pane
+
+
 BUG:
 
- ☐ scroll of notes fades away after of a screen resize
+ ✔ scroll of notes fades away after of a screen resize @done (16-04-26 00:30)
 
 
 

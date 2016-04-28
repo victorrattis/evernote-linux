@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "./out/main.js",
-  "electronVersion": "0.36.8",
+  "electronVersion": "0.36.11",
   "scripts": {
     "test": "standard"
   },
