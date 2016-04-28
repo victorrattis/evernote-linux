@@ -12,13 +12,15 @@ app.on('window-all-closed', function () {
   }
 })
 
-app.on('ready', function () {
+let newWindow = () => {
   const atomScreen = require('screen')
   const size = atomScreen.getPrimaryDisplay().workAreaSize
 
   mainWindow = new BrowserWindow({
     width: size.width,
     height: size.height,
+    'min-width': 650,
+    'min-height': 400,
     frame: true
   })
 
@@ -27,4 +29,16 @@ app.on('ready', function () {
   mainWindow.on('closed', function () {
     mainWindow = null
   })
+}
+
+// OSX only callback - takes care of spawning
+// a new app window if needed
+app.on('activate', function () {
+  if (mainWindow === null) {
+    newWindow()
+  }
+})
+
+app.on('ready', function () {
+  newWindow()
 })
