@@ -1,13 +1,15 @@
 'use strict'
+
 const React = require('react')
+const ObjectAssign = require('object-assign')
 
 const style = {
   unselectable: {
     WebkitUserDrag: 'none',
     WebkitUserSelect: 'none'
   },
+
   div: {
-    height: 48,
     WebkitUserDrag: 'none',
     WebkitUserSelect: 'none'
   }
@@ -18,43 +20,42 @@ let SidebarItem = React.createClass({
 
   getInitialState: function () {
     return {
-      isOver: false,
-      isClicked: false
     }
   },
 
-  unmarks: function () {
-    this.setState({ isClicked: false })
+  getDefaultProps: function () {
+    return {
+      enabled: true
+    }
   },
 
-  mouseOver: function () {
-    this.setState({ isOver: true })
-  },
-
-  mouseOut: function () {
-    this.setState({ isOver: false })
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return nextProps.enabled !== this.props.enabled
   },
 
   mouseClick: function () {
-    this.setState({ isClicked: true })
-
-    if (this.props.onItemSelected !== undefined) {
-      this.props.onItemSelected(this)
+    if (this.props.onClick !== undefined) {
+      this.props.onClick()
     }
   },
 
   render: function () {
-    // The over state overlaps the other states.
-    var imageSource = this.state.isOver ? this.props.imgOver : this.state.isClicked ? this.props.imgSelected : this.props.imgNormal
+    let inlineStyle = ObjectAssign(
+      {},
+      style.div,
+      this.props.style.default,
+      this.props.enabled ? this.props.style.normal : this.props.style.selected
+    )
+    let imageSource = this.props.enabled ? this.props.imgSelected : this.props.imgNormal
 
     return (
-      <div style={style.div}>
+      <div style={inlineStyle}
+        onMouseOver={this.mouseOver}
+        onMouseOut={this.mouseOut}
+        onClick={this.mouseClick} >
         <img
           style={style.unselectable}
-          src={imageSource}
-          onMouseOver={this.mouseOver}
-          onMouseOut={this.mouseOut}
-          onClick={this.mouseClick} />
+          src={imageSource} />
       </div>
     )
   }

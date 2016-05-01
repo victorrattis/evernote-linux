@@ -8,7 +8,7 @@ const style = {
     height: '52px',
     position: 'relative',
     overflow: 'hidden',
-    background: '#f4f2ef',
+    background: '#fbf7f4',
     borderBottom: '1px solid #cfcecb'
   },
 
@@ -37,25 +37,18 @@ const style = {
   }
 }
 
-const NoteHeader = React.createClass({
-  displayName: 'NoteHeader',
+const NotebookHeader = React.createClass({
+  displayName: 'NotebookHeader',
 
   render: function () {
-    let title = 'All Notes'
-
     return (
       <div style={style.header}>
         <div style={style.title}>
-          {title}
-          <img style={style.arrow} src='../../resources/arrow2.png' />
-        </div>
-
-        <div style={style.tag} >
-          <img src='../../resources/new_tag_grey.png' />
+          Notebook Header
         </div>
       </div>
     )
   }
 })
 
-module.exports = NoteHeader
+module.exports = NotebookHeader

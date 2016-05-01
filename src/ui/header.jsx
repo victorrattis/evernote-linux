@@ -3,9 +3,9 @@ const React = require('react')
 
 const style = {
   width: '100%',
-  height: '73px',
-  background: '#F8F8F8',
-  borderBottom: '1px solid #ececec',
+  height: '58px',
+  background: '#d4d2d4',
+  borderBottom: '1px solid #adabad',
   margin: '0',
   position: 'relative',
   overflow: 'hidden'

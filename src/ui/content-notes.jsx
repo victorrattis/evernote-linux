@@ -6,7 +6,7 @@ const SplitPane = require('react-split-pane')
 const NoteSnippetView = require('./note-snippet-view')
 const NoteView = require('./note-view')
 const NoteHeader = require('./note-header')
-const NoteStore = require('../note-store')
+const NoteStore = require('../store/note-store')
 
 const style = {
   // content: {
@@ -28,17 +28,21 @@ const style = {
   }
 }
 
-let Container = React.createClass({
-  displayName: 'Container',
+let ContentNotes = React.createClass({
+  displayName: 'ContentNotes',
 
   getInitialState: function () {
     return {
-      notes: []
+      notes: NoteStore.getNotes()
     }
   },
 
   componentDidMount: function () {
     NoteStore.addChangeListener(this._onChange)
+  },
+
+  componentWillUnmount: function () {
+    NoteStore.removeChangeListener(this._onChange)
   },
 
   _onChange: function () {
@@ -49,8 +53,8 @@ let Container = React.createClass({
     var notes = this.state.notes
 
     return (
-      <SplitPane split='vertical' defaultSize={'350px'}>
-        <SplitPane split='horizontal' defaultSize={'100px'}>
+      <SplitPane split='vertical' defaultSize={'372px'}>
+        <SplitPane split='horizontal' defaultSize={'auto'}>
           <NoteHeader />
           <div style={style.scrollNotes}>
             {notes.map(createNoteItem)}
@@ -65,7 +69,7 @@ let Container = React.createClass({
 let createNoteItem = function (item, index) {
   return (
     <NoteSnippetView
-      key={index}
+      key={item.id}
       title={item.title}
       date={item.date}
       snippet={item.snippet}
@@ -73,4 +77,4 @@ let createNoteItem = function (item, index) {
   )
 }
 
-module.exports = Container
+module.exports = ContentNotes

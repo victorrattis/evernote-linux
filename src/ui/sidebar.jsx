@@ -1,26 +1,34 @@
 'use strict'
+
 const React = require('react')
 const SidebarItem = require('./sidebar-item')
-const AppActions = require('../app-action')
+const AppActions = require('../action/app-action')
+const AppStore = require('../store/app-store')
 
-const style = {
+let style = {
   sidebar: {
-    borderRight: '1px solid #ececec',
+    borderRight: '1px solid #d4d4d4',
+    background: '#484d44',
     float: 'left',
-    width: '73px',
+    width: '58px',
     height: '100%',
-    background: '#F8F8F8',
-    padding: '12px 12px 24px 17px',
     zIndex: 200,
     boxSizing: 'border-box',
     overflow: 'hidden',
     WebkitUserDrag: 'none',
     WebkitUserSelect: 'none',
-    cursor: 'default'
+    cursor: 'default',
+    textAlign: 'center'
   },
 
   logo: {
-    height: '66px'
+    position: 'absolute',
+    bottom: '0px',
+    paddingBottom: '20px',
+    textAlign: 'center',
+    width: '100%',
+    WebkitUserDrag: 'none',
+    WebkitUserSelect: 'none'
   },
 
   unselectable: {
@@ -28,75 +36,89 @@ const style = {
     WebkitUserSelect: 'none'
   },
 
-  group: {
-    marginBottom: '48px'
+  item: {
+    default: {
+      cursor: 'pointer'
+    },
+
+    normal: {
+      background: '#1a88df'
+    },
+
+    selected: {
+      background: '#484d44'
+    }
   }
 }
-
-let previousItem
 
 let SideBar = React.createClass({
   displayName: 'SideBar',
 
-  onItemSelected: function (item) {
-    AppActions.change()
-    if (previousItem !== undefined) {
-      previousItem.unmarks()
+  getInitialState: function () {
+    return {
+      selected: AppStore.getContentId()
     }
-    previousItem = item
+  },
+
+  componentDidMount: function () {
+    AppStore.addChangeListener(this.onChange)
+  },
+
+  componentWillUnmount: function () {
+    AppStore.removeChangeListener(this.onChange)
+  },
+
+  onChange: function () {
+    let selectedContent = AppStore.getContentId()
+
+    if (this.state.selected !== selectedContent) {
+      this.setState({selected: selectedContent})
+    }
+  },
+
+  handleShowNotesClick: function () {
+    AppActions.showNotes('all-notes')
+  },
+
+  handleShowNotebooksClick: function () {
+    AppActions.showNotebooks()
+  },
+
+  handleShowTagsClick: function () {
+    AppActions.showTags()
   },
 
   render: function () {
     return (
       <div style={style.sidebar}>
+        <SidebarItem
+          imgNormal='../../resources/note-normal-gray.png'
+          imgSelected='../../resources/note-normal-white.png'
+          action='SHOW_NOTES_ACTION'
+          style={style.item}
+          onClick={this.handleShowNotesClick}
+          enabled={this.state.selected === 'notes'} />
+
+        <SidebarItem
+          imgNormal='../../resources/notebook-normal-gray.png'
+          imgSelected='../../resources/notebook-normal-white.png'
+          action='SHOW_NOTEBOOKS_ACTION'
+          style={style.item}
+          onClick={this.handleShowNotebooksClick}
+          enabled={this.state.selected === 'notebooks'} />
+
+        <SidebarItem
+          imgNormal='../../resources/tag-normal-gray.png'
+          imgSelected='../../resources/tag-normal-white.png'
+          action='SHOW_TAGS_ACTION'
+          style={style.item}
+          onClick={this.handleShowTagsClick}
+          enabled={this.state.selected === 'tags'} />
+
         <div style={style.logo}>
-          <img style={style.unselectable} src='../../resources/evernote-logo1.png' />
-        </div>
-        <div style={style.group}>
-          <SidebarItem
-            imgNormal='../../resources/new-note-normal.png'
-            imgOver='../../resources/new-note-over.png'
-            imgSelected='../../resources/new-note-clicked.png'
-            action='NEW_NOTE_ACTION'
-            onItemSelected={this.onItemSelected} />
-          <SidebarItem
-            imgNormal='../../resources/search-normal.png'
-            imgOver='../../resources/search-over.png'
-            imgSelected='../../resources/search-clicked.png'
-            action='SEARCH_ACTION'
-            onItemSelected={this.onItemSelected} />
-          <SidebarItem
-            imgNormal='../../resources/work-chat-normal.png'
-            imgOver='../../resources/work-chat-over.png'
-            imgSelected='../../resources/work-chat-clicked.png'
-            action='SHOW_WORK_CHAT_ACTION'
-            onItemSelected={this.onItemSelected} />
-        </div>
-        <div style={style.group}>
-          <SidebarItem
-            imgNormal='../../resources/shortcut-normal.png'
-            imgOver='../../resources/shortcut-over.png'
-            imgSelected='../../resources/shortcut-clicked.png'
-            action='SHOW_SHORCUTS_ACTION'
-            onItemSelected={this.onItemSelected} />
-          <SidebarItem
-            imgNormal='../../resources/note-normal.png'
-            imgOver='../../resources/note-over.png'
-            imgSelected='../../resources/note-clicked.png'
-            action='SHOW_NOTES_ACTION'
-            onItemSelected={this.onItemSelected} />
-          <SidebarItem
-            imgNormal='../../resources/notebook-normal.png'
-            imgOver='../../resources/notebook-over.png'
-            imgSelected='../../resources/notebook-clicked.png'
-            action='SHOW_NOTEBOOKS_ACTION'
-            onItemSelected={this.onItemSelected} />
-          <SidebarItem
-            imgNormal='../../resources/tag-normal.png'
-            imgOver='../../resources/tag-over.png'
-            imgSelected='../../resources/tag-clicked.png'
-            action='SHOW_TAGS_ACTION'
-            onItemSelected={this.onItemSelected} />
+          <img
+            style={style.unselectable}
+            src='../../resources/evernote-logo1.png' />
         </div>
       </div>
     )
