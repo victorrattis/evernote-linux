@@ -6,7 +6,7 @@ const SplitPane = require('react-split-pane')
 const NotebookHeader = require('./notebook-header')
 const NotebookItem = require('./notebook-item')
 const AppActions = require('../action/app-action')
-const AppStore = require('../store/app-store')
+const NotebookStore = require('../store/notebook-store')
 
 const style = {
   test: {
@@ -33,14 +33,20 @@ let ContentNotebook = React.createClass({
 
   getInitialState: function () {
     return {
-      notebooks: AppStore.getNotebooks()
+      notebooks: NotebookStore.getNotebooks()
     }
   },
 
   componentDidMount: function () {
+    NotebookStore.addChangeListener(this._onChange)
   },
 
   componentWillUnmount: function () {
+    NotebookStore.removeChangeListener(this._onChange)
+  },
+
+  _onChange: function () {
+    this.setState({ notebooks: NotebookStore.getNotebooks() })
   },
 
   createNotebookItem: function (item, index) {
@@ -52,11 +58,6 @@ let ContentNotebook = React.createClass({
         onClick={() => AppActions.showNotes(index)} />
     )
   },
-
-  // handleClick: function (index) {
-  //   console.log('iindex: ' + index)
-  //   AppActions.showNotes(index)
-  // },
 
   render: function () {
     return (

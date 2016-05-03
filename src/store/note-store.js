@@ -136,6 +136,6 @@ let NoteStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-AppDispatcher.register(NoteStore.onUpdate)
+const NoteDispatcherToken = AppDispatcher.register(NoteStore.onUpdate)
 
 module.exports = NoteStore
