@@ -1,8 +1,10 @@
 var gulp = require('gulp')
 var babel = require('gulp-babel')
-var run = require('gulp-run')
 var less = require('gulp-less')
 var concat = require('gulp-concat')
+var electron = require('electron-connect').server.create({
+  electron:require('electron-prebuilt')
+})
 
 gulp.task('default', function () {})
 
@@ -34,6 +36,21 @@ gulp.task('build-jsx', function () {
     .pipe(gulp.dest('out'))
 })
 
-gulp.task('run', ['move-html', 'build-jsx', 'build-less'], function () {
-  return run('./node_modules/.bin/electron .').exec()
+var files = ['move-html', 'build-jsx', 'build-less']
+
+gulp.task('run', files, function () {
+  // Start browser process
+  electron.start()
+})
+
+gulp.task('dev', files, function () {
+
+  // Start browser process
+  electron.start()
+
+  // Restart browser process
+  gulp.watch('src/main.js', electron.restart)
+
+  // Reload renderer process
+  gulp.watch('src/**/*', [files, electron.reload])
 })
