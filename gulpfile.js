@@ -2,11 +2,19 @@ var gulp = require('gulp')
 var babel = require('gulp-babel')
 var less = require('gulp-less')
 var concat = require('gulp-concat')
+var check = require('check-dependencies')
 var electron = require('electron-connect').server.create({
   electron:require('electron-prebuilt')
 })
 
 gulp.task('default', function () {})
+
+gulp.task('libs', function () {
+  check.sync({
+    packageDir:'package.json',
+    install: true
+  })
+})
 
 gulp.task('move-html', function () {
   return gulp.src(['src/**/*.+(js|html|css)', '!src/**/*.jsx', '!src/**/*.less'])
@@ -23,7 +31,7 @@ gulp.task('build-less', function () {
     .pipe(gulp.dest(dest))
 })
 
-gulp.task('build-jsx', function () {
+gulp.task('build-jsx', ['libs'], function () {
   var babelconfig = {
     presets: [
       // 'es2015',
