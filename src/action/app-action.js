@@ -1,23 +1,25 @@
 'use strict'
+
 const AppDispatcher = require('../app-dispatcher')
+const Action = require('./action')
 
 let AppActions = {
   showNotes: function (filter) {
     AppDispatcher.dispatch({
-      actionType: 'SHOW_NOTES_ACTION',
+      actionType: Action.SHOW_NOTE_CONTENT,
       filter: filter
     })
   },
 
   showNotebooks: function () {
     AppDispatcher.dispatch({
-      actionType: 'SHOW_NOTEBOOKS_ACTION'
+      actionType: Action.SHOW_NOTEBOOK_CONTENT
     })
   },
 
   showTags: function () {
     AppDispatcher.dispatch({
-      actionType: 'SHOW_TAGS_ACTION'
+      actionType: Action.SHOW_TAG_CONTENT
     })
   }
 }

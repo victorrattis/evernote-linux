@@ -94,7 +94,6 @@ let SideBar = React.createClass({
         <SidebarItem
           imgNormal='../../resources/note-normal-gray.png'
           imgSelected='../../resources/note-normal-white.png'
-          action='SHOW_NOTES_ACTION'
           style={style.item}
           onClick={this.handleShowNotesClick}
           enabled={this.state.selected === 'notes'} />
@@ -102,7 +101,6 @@ let SideBar = React.createClass({
         <SidebarItem
           imgNormal='../../resources/notebook-normal-gray.png'
           imgSelected='../../resources/notebook-normal-white.png'
-          action='SHOW_NOTEBOOKS_ACTION'
           style={style.item}
           onClick={this.handleShowNotebooksClick}
           enabled={this.state.selected === 'notebooks'} />
@@ -110,7 +108,6 @@ let SideBar = React.createClass({
         <SidebarItem
           imgNormal='../../resources/tag-normal-gray.png'
           imgSelected='../../resources/tag-normal-white.png'
-          action='SHOW_TAGS_ACTION'
           style={style.item}
           onClick={this.handleShowTagsClick}
           enabled={this.state.selected === 'tags'} />
