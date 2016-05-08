@@ -3,6 +3,7 @@
 const assign = require('object-assign')
 const EventEmitter = require('events').EventEmitter
 const AppDispatcher = require('../app-dispatcher')
+const Action = require('../action/action')
 
 const CHANGE_EVENT = 'change'
 
@@ -17,7 +18,7 @@ let notebooks = [
 let NotebookStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
-      case 'SHOW_NOTEBOOKS_ACTION':
+      case Action.SHOW_NOTEBOOK_CONTENT:
         NotebookStore.emitChange()
         break
       default:
@@ -38,6 +39,10 @@ let NotebookStore = assign({}, EventEmitter.prototype, {
 
   getNotebooks: function () {
     return notebooks
+  },
+
+  getNotebook: function (index) {
+    return notebooks[index]
   }
 })
 

@@ -21,6 +21,29 @@ let AppActions = {
     AppDispatcher.dispatch({
       actionType: Action.SHOW_TAG_CONTENT
     })
+  },
+
+  selecteNote: function (noteId) {
+    AppDispatcher.dispatch({
+      actionType: Action.SELECT_NOTE,
+      noteId: noteId
+    })
+  },
+
+  addNewTag: function (tag, noteId) {
+    AppDispatcher.dispatch({
+      actionType: Action.ADD_TAG_NOTE,
+      tagInfo: tag,
+      noteId: noteId
+    })
+  },
+
+  alterNote: function (info) {
+    console.log('alter note');
+    AppDispatcher.dispatch({
+      actionType: Action.ALTER_NOTE,
+      note: info
+    })
   }
 }
 

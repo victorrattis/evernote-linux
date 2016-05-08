@@ -7,18 +7,9 @@ const NoteSnippetView = require('./note-snippet-view')
 const NoteView = require('./note-view')
 const NoteHeader = require('./note-header')
 const NoteStore = require('../store/note-store')
+const AppAction = require('../action/app-action')
 
 const style = {
-  // content: {
-  //   // position: 'relative',
-  //   // float: 'left',
-  //   width: '350px',
-  //   height: '100%',
-  //   display: 'table',
-  //   overflow: 'hidden',
-  //   borderRight: '1px solid #ececec'
-  // },
-
   scrollNotes: {
     width: '100%',
     height: '100%',
@@ -49,6 +40,18 @@ let ContentNotes = React.createClass({
     this.setState({ notes: NoteStore.getNotes() })
   },
 
+  createNoteItem: function (item, index) {
+    return (
+      <NoteSnippetView
+        key={item.id}
+        title={item.title}
+        date={item.updated}
+        snippet={item.snippet}
+        thumbnail={item.thumbnail}
+        onMouseDown={ () => AppAction.selecteNote(item.id) } />
+    )
+  },
+
   render: function () {
     var notes = this.state.notes
 
@@ -57,7 +60,7 @@ let ContentNotes = React.createClass({
         <SplitPane split='horizontal' defaultSize={'auto'}>
           <NoteHeader />
           <div style={style.scrollNotes}>
-            {notes.map(createNoteItem)}
+            {notes.map(this.createNoteItem)}
           </div>
         </SplitPane>
         <NoteView />
@@ -65,16 +68,5 @@ let ContentNotes = React.createClass({
     )
   }
 })
-
-let createNoteItem = function (item, index) {
-  return (
-    <NoteSnippetView
-      key={item.id}
-      title={item.title}
-      date={item.date}
-      snippet={item.snippet}
-      thumbnail={item.thumbnail} />
-  )
-}
 
 module.exports = ContentNotes

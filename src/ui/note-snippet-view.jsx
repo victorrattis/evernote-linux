@@ -4,6 +4,12 @@ const React = require('react')
 let NoteSnippetView = React.createClass({
   displayName: 'NoteSnippetView',
 
+  handleMouseDown: function () {
+    if(this.props.onMouseDown != undefined) {
+      this.props.onMouseDown()
+    }
+  },
+
   render: function () {
     let title = this.props.title
     let date = this.props.date
@@ -20,7 +26,7 @@ let NoteSnippetView = React.createClass({
     }
 
     return (
-      <div className='note'>
+      <div className='note' onMouseDown={this.handleMouseDown}>
         <div className='divider'></div>
         {thumbnail}
         <div className='note-test'></div>

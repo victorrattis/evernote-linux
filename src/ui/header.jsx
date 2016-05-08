@@ -6,7 +6,7 @@ const style = {
   height: '58px',
   background: '#d4d2d4',
   borderBottom: '1px solid #adabad',
-  margin: '0',
+  margin: '0px',
   position: 'relative',
   overflow: 'hidden'
 }
