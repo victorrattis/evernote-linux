@@ -162,8 +162,9 @@ let NoteStore = assign({}, EventEmitter.prototype, {
       case Action.ALTER_NOTE:
         let id = action.note.id
         if(id !== undefined) {
-          if (action.note.title !== undefined)
+          if (action.note.title !== undefined) {
             notes[id].title = action.note.title
+          }
 
           if (action.note.content !== undefined) {
             notes[id].content = action.note.content

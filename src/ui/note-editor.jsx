@@ -70,15 +70,14 @@ const colorStyleMap = {
   },
 }
 
-let title = 'Title'
-// let raw = {"entityMap":{},"blocks":[{"key":"dcoro","text":"Hello World","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[]}]}
-// let raw = {"entityMap":{},"blocks":[{"key":"ac3rb","text":"Write Something on HTML","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":6,"length":10,"style":"red"},{"offset":16,"length":3,"style":"orange"},{"offset":19,"length":4,"style":"green"}],"entityRanges":[]}]}
-let raw = {"entityMap":{},"blocks":[{"key":"b10oq","text":"Title\ntask list:","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":5,"style":"BOLD"}],"entityRanges":[]},{"key":"crgk0","text":"task A","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":6,"style":"ITALIC"}],"entityRanges":[]},{"key":"s0tr","text":"task B","type":"unordered-list-item","depth":0,"inlineStyleRanges":[{"offset":0,"length":6,"style":"ITALIC"}],"entityRanges":[]}]}
+let autoSave
 
 const NoteEditor = React.createClass({
   displayName: 'NoteEditor',
 
   getInitialState: function () {
+    autoSave = new AutoSave(this.saveNote, 500)
+
     let editorState
     if(this.props.content === undefined) {
       editorState = EditorState.createEmpty()
@@ -108,8 +107,8 @@ const NoteEditor = React.createClass({
   },
 
   onChange: function (editorState) {
-    let curenntCS = editorState.getCurrentContent()
-    raw = convertToRaw(curenntCS)
+    // let curenntCS = editorState.getCurrentContent()
+    // raw = convertToRaw(curenntCS)
     // console.log(JSON.stringify(raw));
 
     // console.log(JSON.stringify(editorState.getCurrentContent()))
@@ -130,7 +129,7 @@ const NoteEditor = React.createClass({
 
   handleChange: function (event) {
     // if(this.props.onChange != undefined) {
-      this.props.onChange({id: this.props.id, title: event.target.value})
+      // this.props.onChange({id: this.props.id, title: event.target.value})
     // }
   },
 
@@ -158,13 +157,29 @@ const NoteEditor = React.createClass({
     // })
   },
 
+  saveNote: function () {
+    console.log('SAVE');
+    let curenntCS = this.state.editorState.getCurrentContent()
+    let raw = convertToRaw(curenntCS)
+    this.props.onChange({
+      id: this.props.id,
+      title: this.refs.title.value,
+      content: raw
+    })
+  },
+
+  handleKeyUp: function () {
+    autoSave.save()
+  },
+
   render: function () {
     const editorState = this.state.editorState
     return (
-      <div style={style.root}>
+      <div style={style.root} onKeyUp={this.handleKeyUp} onKeyDown={this.handleKeyUp} >
         <input
           key={this.props.id}
           type='text'
+          ref='title'
           style={style.title}
           defaultValue={this.state.title}
           onChange={this.handleChange}
@@ -185,5 +200,17 @@ const NoteEditor = React.createClass({
     )
   }
 })
+
+
+let AutoSave = function (callback, delay) {
+  let timer = 0
+  this.save = function() {
+    clearTimeout(timer);
+    timer = setTimeout(function() {
+        callback()
+    }, delay);
+  }
+}
+
 
 module.exports = NoteEditor

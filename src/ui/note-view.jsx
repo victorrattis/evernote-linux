@@ -128,6 +128,10 @@ const NoteView = React.createClass({
     NoteStore.removeListener('select', this.handleChange)
   },
 
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return nextState.note.id !== this.state.note.id
+  },
+
   handleChange: function () {
     let note = NoteStore.getCurrentNote()
     this.setState({note: note})

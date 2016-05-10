@@ -39,7 +39,6 @@ let AppActions = {
   },
 
   alterNote: function (info) {
-    console.log('alter note');
     AppDispatcher.dispatch({
       actionType: Action.ALTER_NOTE,
       note: info
