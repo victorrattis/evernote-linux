@@ -43,12 +43,12 @@ let ContentNotes = React.createClass({
   createNoteItem: function (item, index) {
     return (
       <NoteSnippetView
-        key={item.id}
+        key={item.idNote}
         title={item.title}
         date={item.updated}
         snippet={item.snippet}
         thumbnail={item.thumbnail}
-        onMouseDown={ () => AppAction.selecteNote(item.id) } />
+        onMouseDown={ () => AppAction.selecteNote(item.idNote) } />
     )
   },
 

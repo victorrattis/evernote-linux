@@ -128,9 +128,9 @@ const NoteView = React.createClass({
     NoteStore.removeListener('select', this.handleChange)
   },
 
-  shouldComponentUpdate: function (nextProps, nextState) {
-    return nextState.note.id !== this.state.note.id
-  },
+  // shouldComponentUpdate: function (nextProps, nextState) {
+  //   return nextState.note.id !== this.state.note.id
+  // },
 
   handleChange: function () {
     let note = NoteStore.getCurrentNote()
@@ -160,7 +160,7 @@ const NoteView = React.createClass({
   },
 
   render: function () {
-    let notebook = NotebookStore.getNotebook(this.state.note.notebook)
+    let notebook = NotebookStore.getNotebook(this.state.note.idNotebook)
     let notebookName = (notebook != undefined) ? notebook.title : ''
 
     // this.noteId = this.state.note.noteId
@@ -196,7 +196,8 @@ const NoteView = React.createClass({
               <NoteEditor
                 title={this.state.note.title}
                 content={this.state.note.content}
-                id={this.state.note.id}
+                editorState={this.state.note.editorState}
+                id={this.state.note.idNote}
                 onChange={this.handleNoteChange} />
             </div>
           </div>

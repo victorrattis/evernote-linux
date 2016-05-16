@@ -2,8 +2,10 @@
 
 const assign = require('object-assign')
 const EventEmitter = require('events').EventEmitter
-const AppDispatcher = require('../app-dispatcher')
+const AppDispatcher = require('../dispatcher/app-dispatcher')
 const Action = require('../action/action')
+const AppActions = require('../action/app-action')
+const AppClient = require('../client/app-client')
 
 const CHANGE_EVENT = 'change'
 
@@ -12,6 +14,13 @@ let contentId = 'notes'
 let AppStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
+      case Action.LOAD_APP_DATA:
+        AppStore.emitChange()
+        break;
+      case Action.APP_INIT:
+        AppClient.getAllData()
+        // AppStore.emitChange()
+        break
       case Action.SHOW_NOTE_CONTENT:
         contentId = 'notes'
         AppStore.emitChange()

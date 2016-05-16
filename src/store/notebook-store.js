@@ -2,23 +2,24 @@
 
 const assign = require('object-assign')
 const EventEmitter = require('events').EventEmitter
-const AppDispatcher = require('../app-dispatcher')
+const AppDispatcher = require('../dispatcher/app-dispatcher')
 const Action = require('../action/action')
+const AppClient = require('../client/app-client')
 
 const CHANGE_EVENT = 'change'
 
-let notebooks = [
-  { id: 0, title: '0.Inbox', number: 5 },
-  { id: 1, title: '1.Actinable', number: 65 },
-  { id: 2, title: '2.References', number: 32 },
-  { id: 3, title: '3.Statistics', number: 90 },
-  { id: 4, title: 'Trash', number: 49 }
-]
+let notebooks = []
 
 let NotebookStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
+      case Action.LOAD_APP_DATA:
+        notebooks = action.data.notebooks
+        break;
       case Action.SHOW_NOTEBOOK_CONTENT:
+        // AppClient.getNotebooks((_notebooks) => {
+        //   notebooks = _notebooks
+        // })
         NotebookStore.emitChange()
         break
       default:

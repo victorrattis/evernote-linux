@@ -17,7 +17,7 @@ gulp.task('libs', function () {
 })
 
 gulp.task('move-html', function () {
-  return gulp.src(['src/**/*.+(js|html|css)', '!src/**/*.jsx', '!src/**/*.less'])
+  return gulp.src(['src/**/*.+(js|html|css)', '!src/**/*.jsx', '!src/**/*.less', '!src/server/**/*'])
     .pipe(gulp.dest('out'))
 })
 

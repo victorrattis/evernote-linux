@@ -6,6 +6,7 @@ const SplitPane = require('react-split-pane')
 
 const Container = require('./container')
 const Header = require('./header')
+const AppAction = require('../action/app-action')
 
 const App = React.createClass({
   render: function () {
@@ -17,6 +18,8 @@ const App = React.createClass({
     )
   }
 })
+
+AppAction.initApp()
 
 const appElement = document.getElementById('app')
 ReactDOM.render(<App />, appElement)

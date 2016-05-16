@@ -19,7 +19,7 @@ let NoteSnippetView = React.createClass({
     let titleStyle = 'note-title '
     let snipperStyle = 'note-body '
 
-    if (this.props.thumbnail !== undefined) {
+    if (this.props.thumbnail !== undefined && this.props.thumbnail !== '') {
       thumbnail = <img className='note-thumbnail' src={this.props.thumbnail} />
       titleStyle += 'note-tile-smaller'
       snipperStyle += 'note-body-smaller'

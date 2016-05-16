@@ -1,9 +1,18 @@
 'use strict'
 
-const AppDispatcher = require('../app-dispatcher')
+const AppDispatcher = require('../dispatcher/app-dispatcher')
 const Action = require('./action')
 
 let AppActions = {
+  initApp: () => AppDispatcher.dispatch({
+    actionType: Action.APP_INIT
+  }),
+
+  loadData: (data) => AppDispatcher.dispatch({
+    actionType: Action.LOAD_APP_DATA,
+    data: data
+  }),
+
   showNotes: function (filter) {
     AppDispatcher.dispatch({
       actionType: Action.SHOW_NOTE_CONTENT,

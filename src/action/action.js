@@ -2,6 +2,10 @@
  * Describe the action identifies the action that occurs in the application.
  */
 const Action = {
+  APP_INIT: 'INIT',
+
+  LOAD_APP_DATA: 'LOADE_APP_DATA',
+
   /**
    * Action to show note content screen.
    */

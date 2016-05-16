@@ -9,6 +9,7 @@ const Modifier = draft.Modifier
 const convertToRaw = draft.convertToRaw
 const convertFromRaw = draft.convertFromRaw
 const ContentState = draft.ContentState
+const convertFromHTML = draft.convertFromHTML
 
 const style = {
   root: {
@@ -79,10 +80,10 @@ const NoteEditor = React.createClass({
     autoSave = new AutoSave(this.saveNote, 500)
 
     let editorState
-    if(this.props.content === undefined) {
+    if(!this.props.content) {
       editorState = EditorState.createEmpty()
     } else {
-      let contentState = convertFromRaw(this.props.content)
+      let contentState = convertFromRaw(JSON.parse(this.props.content))
       editorState = EditorState.createWithContent(contentState)
     }
 
@@ -94,43 +95,48 @@ const NoteEditor = React.createClass({
 
   componentWillReceiveProps: function (nextProps) {
     let editorState
-    if(nextProps.content === undefined) {
-      editorState = EditorState.createEmpty()
-    } else {
-      let contentState = convertFromRaw(nextProps.content)
-      editorState = EditorState.createWithContent(contentState)
+    if(!nextProps.editorState) {
+      if(!nextProps.content) {
+        editorState = EditorState.createEmpty()
+      } else {
+        let contentState = convertFromRaw(JSON.parse(nextProps.content))
+        editorState = EditorState.createWithContent(contentState)
+      }
+    }else {
+      editorState = nextProps.editorState
     }
+
+    // if(nextProps.content === undefined) {
+    //   editorState = EditorState.createEmpty()
+    // } else {
+    //   let contentState = convertFromRaw(nextProps.content)
+    //   editorState = EditorState.createWithContent(contentState)
+    // }
+
     this.setState({
       title: nextProps.title,
       editorState: editorState
     })
   },
 
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return nextState.editorState !== this.state.editorState
+  },
+
   onChange: function (editorState) {
-    // let curenntCS = editorState.getCurrentContent()
-    // raw = convertToRaw(curenntCS)
-    // console.log(JSON.stringify(raw));
+    this.props.onChange({
+      id: this.props.id,
+      editorState: editorState
+    })
 
-    // console.log(JSON.stringify(editorState.getCurrentContent()))
-    // let raw = convertToRaw(editorState.getCurrentContent())
-    // let s = EditorState.createWithContent()
-
-    // console.log(editorState)
     this.setState({ editorState: editorState })
-    // if(this.props.onChange !== undefined) {
-    //   this.props.onChange(this.state.note)
-    // }
-
-      // this.props.onChange({
-      //   id: this.props.id,
-      //   content: raw
-      // })
   },
 
   handleChange: function (event) {
-    // if(this.props.onChange != undefined) {
-      // this.props.onChange({id: this.props.id, title: event.target.value})
-    // }
+    this.props.onChange({
+      id: this.props.id,
+      title: event.target.value
+    })
   },
 
   focus: function () {
@@ -146,31 +152,21 @@ const NoteEditor = React.createClass({
     }
     return false;
   },
-
-  handleBlur: function () {
-    // event.target.value
-    // let curenntCS = this.state.editorState.getCurrentContent()
-    // raw = convertToRaw(curenntCS)
-    // this.props.onChange({
-    //   id: this.props.id,
-    //   content: raw
-    // })
-  },
-
-  saveNote: function () {
-    console.log('SAVE');
-    let curenntCS = this.state.editorState.getCurrentContent()
-    let raw = convertToRaw(curenntCS)
-    this.props.onChange({
-      id: this.props.id,
-      title: this.refs.title.value,
-      content: raw
-    })
-  },
-
-  handleKeyUp: function () {
-    autoSave.save()
-  },
+  //
+  // saveNote: function () {
+  //   console.log('SAVE');
+  //   let curenntCS = this.state.editorState.getCurrentContent()
+  //   let raw = convertToRaw(curenntCS)
+  //   this.props.onChange({
+  //     id: this.props.id,
+  //     title: this.refs.title.value,
+  //     content: raw
+  //   })
+  // },
+  //
+  // handleKeyUp: function () {
+  //   // autoSave.save()
+  // },
 
   render: function () {
     const editorState = this.state.editorState
@@ -182,8 +178,7 @@ const NoteEditor = React.createClass({
           ref='title'
           style={style.title}
           defaultValue={this.state.title}
-          onChange={this.handleChange}
-          onBlur={this.handleBlur()} />
+          onChange={this.handleChange} />
         <div
           style={style.editor}
           onClick={this.focus} >
@@ -193,8 +188,7 @@ const NoteEditor = React.createClass({
             editorState={editorState}
             onChange={this.onChange}
             placeholder="Drag Files hera or just start typing"
-            ref="editor"
-          />
+            ref="editor" />
         </div>
       </div>
     )

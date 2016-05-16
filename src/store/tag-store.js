@@ -2,31 +2,21 @@
 
 const assign = require('object-assign')
 const EventEmitter = require('events').EventEmitter
-const AppDispatcher = require('../app-dispatcher')
+const AppDispatcher = require('../dispatcher/app-dispatcher')
 const Action = require('../action/action')
 
 const CHANGE_EVENT = 'change'
 
-let tags = [
-  {
-    id: 0,
-    name: '.Next Action'
-  },
-  {
-    id: 1,
-    name: '@computador'
-  },
-  {
-    id: 2,
-    name: 'Todo'
-  },
-]
+let tags = []
 
 let newTagId;
 
 let TagStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
+      case Action.LOAD_APP_DATA:
+        tags = action.data.tags
+        break;
       case Action.ADD_TAG_NOTE:
         console.log('add tag note: ' + tags.length)
         newTagId = tags.length
