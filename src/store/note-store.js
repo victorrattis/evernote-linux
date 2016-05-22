@@ -8,14 +8,16 @@ const Action = require('../action/action')
 const TagStore = require('../store/tag-store')
 const AppClient = require('../client/app-client')
 
-
 const convertToRaw = require('draft-js').convertToRaw
 
 let notes = []
 
-let current = notes
 let indexSelected;
 let selected;
+let c = 100;
+let idSelected = 1;
+
+let changes = {}
 
 const CHANGE_EVENT = 'change'
 const SELECT_EVENT = 'select'
@@ -23,23 +25,72 @@ const SELECT_EVENT = 'select'
 let NoteStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
-      case Action.LOAD_APP_DATA:
-        // notes = action.data.notes
-        // break;
-      case Action.SHOW_NOTE_CONTENT:
-        AppClient.getNotes('idNote, title, updated, snippet, thumbnail', (_notes) => {
-          var a = []
-          for(let n of _notes) a[n.idNote] = n
-          notes = a
-          current = notes
-          NoteStore.emitChange()
-        })
-        break
-      case Action.SELECT_NOTE:
-        AppClient.getSelectedNote(action.noteId, '', (note) => {
+      case Action.NEW_NOTE:
+        let newNote = {
+          noteId: c,
+          created: dateFormat(new Date(), 'yyyy-mm-dd'),
+          updated: dateFormat(new Date(), 'yyyy-mm-dd'),
+          notebookId: 1
+        }
+
+        let lastIndex = notes.push(newNote)
+        selected = newNote
+        idSelected = c
+        AppClient.newNote(newNote, (note) => {
+          console.log('new note: ' + note.noteId + ' = ' + c)
+
+          notes[lastIndex - 1] = note
+          idSelected = note.noteId
           selected = note
+          NoteStore.emitChange()
           NoteStore.emitSelect()
         })
+        c++
+        NoteStore.emitChange()
+        NoteStore.emitSelect()
+        break
+      case Action.DELETE_NOTE:
+        console.log('delete note: ' + action.noteId)
+
+        // Find the note index that will be deleted.
+        let index = notes.findIndex((item) => item && item.noteId === action.noteId)
+        notes.splice(index, 1)
+
+        // Set the selected note index.
+        let selectedIndex = notes[index] ? index : notes[index - 1] ? index - 1 : -1
+
+        idSelected = selectedIndex >= 0 ? notes[selectedIndex].noteId : -1
+        selected = selectedIndex >= 0 ? notes[selectedIndex] : {}
+
+        AppClient.deleteNote(action.noteId)
+
+        NoteStore.emitChange()
+        NoteStore.emitSelect()
+        break
+      case Action.APP_INIT:
+        // Get all notes saves on server.
+        AppClient.getNotes('', (_notes) => {
+          notes = _notes
+          selected = notes[0]
+          idSelected = selected.noteId
+
+          // TODO: remove it later.
+          NoteStore.emitChange()
+          NoteStore.emitSelect()
+        })
+        break;
+      case Action.SHOW_NOTE_CONTENT:
+        NoteStore.emitChange()
+        break
+      case Action.SELECT_NOTE:
+        let noteSelected = notes.find((item) => item && item.noteId === action.noteId)
+
+        if(noteSelected) {
+          idSelected = noteSelected.noteId
+          selected = noteSelected
+          NoteStore.emitSelect()
+          NoteStore.emitChange()
+        }
         break
       case Action.ADD_TAG_NOTE:
         // let newTagId = TagStore.getNewTag()
@@ -53,10 +104,6 @@ let NoteStore = assign({}, EventEmitter.prototype, {
             selected.title = action.note.title
           }
 
-          // if (action.note.content !== undefined) {
-          //   selected.content = action.note.content
-          // }
-
           if (action.note.editorState !== undefined) {
             selected.editorState = action.note.editorState
             let curenntCS = selected.editorState.getCurrentContent()
@@ -66,7 +113,6 @@ let NoteStore = assign({}, EventEmitter.prototype, {
 
           selected.updated = dateFormat(new Date(), 'yyyy-mm-dd')
 
-          current[id] = selected
           AppClient.updateNote(selected)
           NoteStore.emitChange()
         }
@@ -96,11 +142,15 @@ let NoteStore = assign({}, EventEmitter.prototype, {
   },
 
   getNotes: function () {
-    return current
+    return notes
   },
 
   getCurrentNote: function () {
     return selected
+  },
+
+  getgetIdSelected: function () {
+    return idSelected
   }
 })
 

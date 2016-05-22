@@ -8,8 +8,7 @@ const style = {
     height: '52px',
     position: 'relative',
     overflow: 'hidden',
-    background: '#f4f2ef',
-    borderBottom: '1px solid #cfcecb'
+    background: '#f4f2ef'
   },
 
   title: {

@@ -52,6 +52,19 @@ let AppActions = {
       actionType: Action.ALTER_NOTE,
       note: info
     })
+  },
+
+  newNote: function () {
+    AppDispatcher.dispatch({
+      actionType: Action.NEW_NOTE
+    })
+  },
+
+  deleteNote: function (noteId) {
+    AppDispatcher.dispatch({
+      actionType: Action.DELETE_NOTE,
+      noteId: noteId
+    })
   }
 }
 

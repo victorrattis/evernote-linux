@@ -8,15 +8,9 @@ const NoteView = require('./note-view')
 const NoteHeader = require('./note-header')
 const NoteStore = require('../store/note-store')
 const AppAction = require('../action/app-action')
+const NoteScroll = require('./note-scroll')
 
 const style = {
-  scrollNotes: {
-    width: '100%',
-    height: '100%',
-    position: 'absolute',
-    overflowX: 'hidden',
-    overflowY: 'auto'
-  }
 }
 
 let ContentNotes = React.createClass({
@@ -24,7 +18,8 @@ let ContentNotes = React.createClass({
 
   getInitialState: function () {
     return {
-      notes: NoteStore.getNotes()
+      notes: NoteStore.getNotes(),
+      selected: NoteStore.getgetIdSelected()
     }
   },
 
@@ -37,31 +32,20 @@ let ContentNotes = React.createClass({
   },
 
   _onChange: function () {
-    this.setState({ notes: NoteStore.getNotes() })
-  },
-
-  createNoteItem: function (item, index) {
-    return (
-      <NoteSnippetView
-        key={item.idNote}
-        title={item.title}
-        date={item.updated}
-        snippet={item.snippet}
-        thumbnail={item.thumbnail}
-        onMouseDown={ () => AppAction.selecteNote(item.idNote) } />
-    )
+    this.setState({
+      notes: NoteStore.getNotes(),
+      selected: NoteStore.getgetIdSelected()
+    })
   },
 
   render: function () {
-    var notes = this.state.notes
-
     return (
       <SplitPane split='vertical' defaultSize={'372px'}>
         <SplitPane split='horizontal' defaultSize={'auto'}>
           <NoteHeader />
-          <div style={style.scrollNotes}>
-            {notes.map(this.createNoteItem)}
-          </div>
+          <NoteScroll
+            notes={this.state.notes}
+            selected={this.state.selected}/>
         </SplitPane>
         <NoteView />
       </SplitPane>

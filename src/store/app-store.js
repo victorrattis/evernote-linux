@@ -18,7 +18,7 @@ let AppStore = assign({}, EventEmitter.prototype, {
         AppStore.emitChange()
         break;
       case Action.APP_INIT:
-        AppClient.getAllData()
+        // AppClient.getAllData()
         // AppStore.emitChange()
         break
       case Action.SHOW_NOTE_CONTENT:

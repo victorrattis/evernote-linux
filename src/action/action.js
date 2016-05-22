@@ -34,7 +34,11 @@ const Action = {
   /**
    * Alter a note existing.
    */
-  ALTER_NOTE: 'ALTER_NOTE'
+  ALTER_NOTE: 'ALTER_NOTE',
+
+  NEW_NOTE: 'NEW_NOTE',
+
+  DELETE_NOTE: 'DELETE_NOTE'
 }
 
 module.exports = Action

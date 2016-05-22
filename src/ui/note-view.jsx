@@ -109,6 +109,13 @@ const style = {
     width: '100%',
     WebkitUserDrag: 'none',
   },
+
+  delete: {
+    position: 'absolute',
+    right: 0,
+    top: 2,
+    cursor: 'pointer',
+  }
 }
 
 const NoteView = React.createClass({
@@ -153,15 +160,21 @@ const NoteView = React.createClass({
     return dateFormat(new Date(date), "mmm dd, yyyy")
   },
 
-  handleNoteChange: function(info) {
+  handleNoteChange: function (info) {
     // if(info.title !== undefined) {
       AppAction.alterNote(info)
     // }
   },
 
+  handleMouseDown: function () {
+    if(this.state.note.noteId) {
+      AppAction.deleteNote(this.state.note.noteId)
+    }
+  },
+
   render: function () {
-    let notebook = NotebookStore.getNotebook(this.state.note.idNotebook)
-    let notebookName = (notebook != undefined) ? notebook.title : ''
+    let notebook = NotebookStore.getNotebook(this.state.note.notebookId)
+    let notebookName = (notebook != undefined) ? notebook.name : ''
 
     // this.noteId = this.state.note.noteId
     let tagElements = null
@@ -187,17 +200,21 @@ const NoteView = React.createClass({
                 <TextInput  onBlur={this.handleBlur} />
               </div>
             </SplitPane>
+
+            <div style={style.delete} onMouseDown={this.handleMouseDown} >
+              <img src='../../resources/delete-icon.png' />
+            </div>
           </div>
           <div>
-            <div style={style.noteInfo}>
+            <div style={style.noteInfo} >
               <span>Created: {this.dateFormatter(this.state.note.created)} &nbsp;&nbsp;&nbsp; Updated: {this.dateFormatter(this.state.note.updated)}</span>
             </div>
             <div style={style.editor}>
               <NoteEditor
-                title={this.state.note.title}
+                title={this.state.note.title || ''}
                 content={this.state.note.content}
                 editorState={this.state.note.editorState}
-                id={this.state.note.idNote}
+                id={this.state.note.noteId}
                 onChange={this.handleNoteChange} />
             </div>
           </div>

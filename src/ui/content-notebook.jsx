@@ -52,8 +52,8 @@ let ContentNotebook = React.createClass({
   createNotebookItem: function (item, index) {
     return (
       <NotebookItem
-        key={item.id}
-        title={item.title}
+        key={item.notebookId}
+        title={item.name}
         number={item.number}
         onClick={() => AppActions.showNotes(index)} />
     )

@@ -13,13 +13,13 @@ let notebooks = []
 let NotebookStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
-      case Action.LOAD_APP_DATA:
-        notebooks = action.data.notebooks
-        break;
+      case Action.APP_INIT:
+        AppClient.getNotebooks((_notebooks) => {
+          console.log('get notebook')
+          notebooks = _notebooks
+        })
+        break
       case Action.SHOW_NOTEBOOK_CONTENT:
-        // AppClient.getNotebooks((_notebooks) => {
-        //   notebooks = _notebooks
-        // })
         NotebookStore.emitChange()
         break
       default:
@@ -43,7 +43,11 @@ let NotebookStore = assign({}, EventEmitter.prototype, {
   },
 
   getNotebook: function (index) {
-    return notebooks[index]
+    return notebooks.find((item) => item.notebookId === index)
+  },
+
+  getNotebookDefault: function () {
+    return ''
   }
 })
 
