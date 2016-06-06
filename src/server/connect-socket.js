@@ -2,30 +2,32 @@
 const NoteDB = require('./note')
 const NotebookData = require('./notebook-data')
 
+
 /**
- *
- * @param {Socket} socket
- * @param {} databse
+ * Event that send all notes that are on database, using the same channel to send it.
  */
+const EVENT_GET_NOTES = 'get-notes'
+const EVENT_UPDATE_NOTE = 'update-note'
+const EVENT_NEW_NOTE = 'new-note'
+const EVENT_DELETE_NOTE = 'delete-note'
+const EVENT_GET_NOTEBOOKS = 'get-notebooks'
+
 const connectSocket = function (socket, database) {
   let noteDB = new NoteDB(database)
   let notebookData = new NotebookData(database)
 
-  socket.on('get-notes',     onGetNotes.bind(null, socket, noteDB))
-  socket.on('update-note',   onUpdateNote.bind(null, socket, noteDB))
-  socket.on('new-note',      onNewNote.bind(null, socket, noteDB))
-  socket.on('delete-note',   onDeleteNote.bind(null, socket, noteDB))
-  socket.on('get-notebooks', onGetNotebooks.bind(null, socket, notebookData))
+  socket.on(EVENT_GET_NOTES,     onGetNotes.bind(null, socket, noteDB))
+  socket.on(EVENT_UPDATE_NOTE,   onUpdateNote.bind(null, socket, noteDB))
+  socket.on(EVENT_NEW_NOTE,      onNewNote.bind(null, socket, noteDB))
+  socket.on(EVENT_DELETE_NOTE,   onDeleteNote.bind(null, socket, noteDB))
+  socket.on(EVENT_GET_NOTEBOOKS, onGetNotebooks.bind(null, socket, notebookData))
 }
 
-/**
- *
- */
 const onGetNotes = function (socket, noteDB) {
   noteDB.query()
   .then((notes) => {
     console.log('get-notes')
-    socket.emit('get-notes', JSON.stringify(notes))
+    socket.emit('get-notes', notes)
   })
   .catch((error) => {
     console.log(error)
@@ -46,7 +48,7 @@ const onNewNote = function (socket, noteDB, data) {
   .then((notes) => {
     if(notes.length >  0) {
       console.log('send: new-note');
-      socket.emit('new-note', JSON.stringify(notes[0]))
+      socket.emit('new-note', notes[0])
     }
   })
 
@@ -81,7 +83,7 @@ const onGetNotebooks = function (socket, notebookData) {
   notebookData.query()
   .then((notebooks) => {
     console.log('get-notebooks')
-    socket.emit('get-notebooks', JSON.stringify(notebooks))
+    socket.emit('get-notebooks', notebooks)
   })
 }
 

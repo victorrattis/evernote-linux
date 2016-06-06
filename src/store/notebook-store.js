@@ -20,7 +20,11 @@ let NotebookStore = assign({}, EventEmitter.prototype, {
         })
         break
       case Action.SHOW_NOTEBOOK_CONTENT:
-        NotebookStore.emitChange()
+        AppClient.getNotebooks((_notebooks) => {
+          console.log('get notebook')
+          notebooks = _notebooks
+          NotebookStore.emitChange()
+        })
         break
       default:
     }

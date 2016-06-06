@@ -38,7 +38,9 @@ const Action = {
 
   NEW_NOTE: 'NEW_NOTE',
 
-  DELETE_NOTE: 'DELETE_NOTE'
+  DELETE_NOTE: 'DELETE_NOTE',
+
+  APP_CONNECTED: 'APP_CONNECTED'
 }
 
 module.exports = Action

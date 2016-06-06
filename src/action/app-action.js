@@ -65,7 +65,11 @@ let AppActions = {
       actionType: Action.DELETE_NOTE,
       noteId: noteId
     })
-  }
+  },
+
+  appConnected: () => AppDispatcher.dispatch({
+    actionType: Action.APP_CONNECTED
+  })
 }
 
 module.exports = AppActions
