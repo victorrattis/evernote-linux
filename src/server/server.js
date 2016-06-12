@@ -9,7 +9,7 @@ const connectDB = require('./connect-database')
 let database = new connectDB('root', '112358')
 database.connect()
 
-// When a client connects to the server.
+// When a client connects on the server.
 io.on('connection', function(socket) {
   console.log('connected')
 
@@ -17,6 +17,7 @@ io.on('connection', function(socket) {
     console.log('disconnected')
   })
 
+  // Setting the communication facade between client and server.
   connectSocket(socket, database)
 })
 

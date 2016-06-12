@@ -10,9 +10,6 @@ const mysql = require('mysql')
 const DatabaseConnect = function (user, password) {
   let connection
 
-  /**
-   *
-   */
   this.connect = function () {
     connection = mysql.createConnection({
       host     : 'localhost',
@@ -22,9 +19,6 @@ const DatabaseConnect = function (user, password) {
     });
   }
 
-  /**
-   *
-   */
   this.query = function (sqlCommand, callback) {
     connection.query(sqlCommand, callback)
   }

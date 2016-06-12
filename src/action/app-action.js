@@ -69,6 +69,11 @@ let AppActions = {
 
   appConnected: () => AppDispatcher.dispatch({
     actionType: Action.APP_CONNECTED
+  }),
+
+  insertNote: (notes) => AppDispatcher.dispatch({
+    actionType: Action.INSERT_NOTE,
+    notes: notes
   })
 }
 

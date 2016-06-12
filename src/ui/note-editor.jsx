@@ -71,14 +71,10 @@ const colorStyleMap = {
   },
 }
 
-let autoSave
-
 const NoteEditor = React.createClass({
   displayName: 'NoteEditor',
 
   getInitialState: function () {
-    autoSave = new AutoSave(this.saveNote, 500)
-
     let editorState
     if(!this.props.content) {
       editorState = EditorState.createEmpty()
@@ -105,13 +101,6 @@ const NoteEditor = React.createClass({
     }else {
       editorState = nextProps.editorState
     }
-
-    // if(nextProps.content === undefined) {
-    //   editorState = EditorState.createEmpty()
-    // } else {
-    //   let contentState = convertFromRaw(nextProps.content)
-    //   editorState = EditorState.createWithContent(contentState)
-    // }
 
     this.setState({
       title: nextProps.title,
@@ -152,21 +141,6 @@ const NoteEditor = React.createClass({
     }
     return false;
   },
-  //
-  // saveNote: function () {
-  //   console.log('SAVE');
-  //   let curenntCS = this.state.editorState.getCurrentContent()
-  //   let raw = convertToRaw(curenntCS)
-  //   this.props.onChange({
-  //     id: this.props.id,
-  //     title: this.refs.title.value,
-  //     content: raw
-  //   })
-  // },
-  //
-  // handleKeyUp: function () {
-  //   // autoSave.save()
-  // },
 
   render: function () {
     const editorState = this.state.editorState
@@ -194,17 +168,5 @@ const NoteEditor = React.createClass({
     )
   }
 })
-
-
-let AutoSave = function (callback, delay) {
-  let timer = 0
-  this.save = function() {
-    clearTimeout(timer);
-    timer = setTimeout(function() {
-        callback()
-    }, delay);
-  }
-}
-
 
 module.exports = NoteEditor

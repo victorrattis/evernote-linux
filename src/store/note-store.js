@@ -13,15 +13,12 @@ const convertToRaw = require('draft-js').convertToRaw
 
 let notes = []
 
-// Represents data unsaved. The data that the User has changed and that weren't saved on the server.
+// Represents unsaved data. The data that the User has changed and that weren't saved on the server.
 let unsaved = []
 
 let indexSelected;
 let selected;
-let c = 100;
 let idSelected = 1;
-
-let changes = {}
 
 const CHANGE_EVENT = 'change'
 const SELECT_EVENT = 'select'
@@ -36,6 +33,7 @@ let NoteStore = assign({}, EventEmitter.prototype, {
         // Get all notes saves on server.
         AppClient.getNotes((_notes) => {
           notes = _notes
+          unsaved.forEach((item) => {notes.push(item.refNote)})
           selected = notes[0]
           idSelected = selected.noteId
 
@@ -135,6 +133,16 @@ let NoteStore = assign({}, EventEmitter.prototype, {
 
         NoteStore.emitChange()
         NoteStore.emitSelect()
+        break
+      case Action.INSERT_NOTE:
+        console.log('action: insert note')
+        if(action.notes) {
+          action.notes.forEach((item) => {
+            console.log(item)
+            notes.push(item)
+          })
+          NoteStore.emitChange()
+        }
         break
       default:
     }
