@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react')
+const React = require('react');
 
 const style = {
   header: {
@@ -34,13 +34,13 @@ const style = {
     paddingRight: '16px',
     paddingTop: '16px'
   }
-}
+};
 
 const NoteHeader = React.createClass({
   displayName: 'NoteHeader',
 
   render: function () {
-    let title = 'All Notes'
+    let title = 'All Notes';
 
     return (
       <div style={style.header}>
@@ -53,8 +53,8 @@ const NoteHeader = React.createClass({
           <img src='../../resources/new_tag_grey.png' />
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NoteHeader
+module.exports = NoteHeader;

@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react')
+const React = require('react');
 
 let ContentTag = React.createClass({
   displayName: 'ContentTag',
@@ -10,8 +10,8 @@ let ContentTag = React.createClass({
       <div>
         Tag View
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = ContentTag
+module.exports = ContentTag;

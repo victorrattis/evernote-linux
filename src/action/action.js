@@ -43,6 +43,6 @@ const Action = {
   APP_CONNECTED: 'APP_CONNECTED',
 
   INSERT_NOTE: 'INSERT_NOTE'
-}
+};
 
-module.exports = Action
+module.exports = Action;

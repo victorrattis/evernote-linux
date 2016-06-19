@@ -1,17 +1,12 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const SplitPane = require('react-split-pane')
+const React = require('react');
+const SplitPane = require('react-split-pane');
 
-const NoteSnippetView = require('./note-snippet-view')
-const NoteView = require('./note-view')
-const NoteHeader = require('./note-header')
-const NoteStore = require('../store/note-store')
-const AppAction = require('../action/app-action')
-const NoteScroll = require('./note-scroll')
-
-const style = {
-}
+const NoteView = require('./note-view');
+const NoteHeader = require('./note-header');
+const NoteStore = require('../store/note-store');
+const NoteScroll = require('./note-scroll');
 
 let ContentNotes = React.createClass({
   displayName: 'ContentNotes',
@@ -20,22 +15,22 @@ let ContentNotes = React.createClass({
     return {
       notes: NoteStore.getNotes(),
       selected: NoteStore.getgetIdSelected()
-    }
+    };
   },
 
   componentDidMount: function () {
-    NoteStore.addChangeListener(this._onChange)
+    NoteStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    NoteStore.removeChangeListener(this._onChange)
+    NoteStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {
     this.setState({
       notes: NoteStore.getNotes(),
       selected: NoteStore.getgetIdSelected()
-    })
+    });
   },
 
   render: function () {
@@ -49,8 +44,8 @@ let ContentNotes = React.createClass({
         </SplitPane>
         <NoteView />
       </SplitPane>
-    )
+    );
   }
-})
+});
 
-module.exports = ContentNotes
+module.exports = ContentNotes;

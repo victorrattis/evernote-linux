@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const draft = require('draft-js')
-const Editor = draft.Editor
-const EditorState = draft.EditorState
-const RichUtils = draft.RichUtils
-const Modifier = draft.Modifier
-const convertToRaw = draft.convertToRaw
-const convertFromRaw = draft.convertFromRaw
-const ContentState = draft.ContentState
-const convertFromHTML = draft.convertFromHTML
+const React = require('react');
+const draft = require('draft-js');
+const Editor = draft.Editor;
+const EditorState = draft.EditorState;
+const RichUtils = draft.RichUtils;
+// const Modifier = draft.Modifier;
+// const convertToRaw = draft.convertToRaw;
+const convertFromRaw = draft.convertFromRaw;
+// const ContentState = draft.ContentState;
+// const convertFromHTML = draft.convertFromHTML;
 
 const style = {
   root: {
@@ -43,7 +43,7 @@ const style = {
     minHeight: '400px',
     WebkitUserDrag: 'none',
   }
-}
+};
 
 const colorStyleMap = {
   red: {
@@ -68,64 +68,64 @@ const colorStyleMap = {
   },
   violet: {
     color: 'rgba(127, 0, 255, 1.0)',
-  },
-}
+  }
+};
 
 const NoteEditor = React.createClass({
   displayName: 'NoteEditor',
 
   getInitialState: function () {
-    let editorState
+    let editorState;
     if(!this.props.content) {
-      editorState = EditorState.createEmpty()
+      editorState = EditorState.createEmpty();
     } else {
-      let contentState = convertFromRaw(JSON.parse(this.props.content))
-      editorState = EditorState.createWithContent(contentState)
+      let contentState = convertFromRaw(JSON.parse(this.props.content));
+      editorState = EditorState.createWithContent(contentState);
     }
 
     return {
       editorState: editorState,
       title: this.props.title,
-    }
+    };
   },
 
   componentWillReceiveProps: function (nextProps) {
-    let editorState
+    let editorState;
     if(!nextProps.editorState) {
       if(!nextProps.content) {
-        editorState = EditorState.createEmpty()
+        editorState = EditorState.createEmpty();
       } else {
-        let contentState = convertFromRaw(JSON.parse(nextProps.content))
-        editorState = EditorState.createWithContent(contentState)
+        let contentState = convertFromRaw(JSON.parse(nextProps.content));
+        editorState = EditorState.createWithContent(contentState);
       }
     }else {
-      editorState = nextProps.editorState
+      editorState = nextProps.editorState;
     }
 
     this.setState({
       title: nextProps.title,
       editorState: editorState
-    })
+    });
   },
 
   shouldComponentUpdate: function (nextProps, nextState) {
-    return nextState.editorState !== this.state.editorState
+    return nextState.editorState !== this.state.editorState;
   },
 
   onChange: function (editorState) {
     this.props.onChange({
       id: this.props.id,
       editorState: editorState
-    })
+    });
 
-    this.setState({ editorState: editorState })
+    this.setState({ editorState: editorState });
   },
 
   handleChange: function (event) {
     this.props.onChange({
       id: this.props.id,
       title: event.target.value
-    })
+    });
   },
 
   focus: function () {
@@ -143,7 +143,7 @@ const NoteEditor = React.createClass({
   },
 
   render: function () {
-    const editorState = this.state.editorState
+    const editorState = this.state.editorState;
     return (
       <div style={style.root} onKeyUp={this.handleKeyUp} onKeyDown={this.handleKeyUp} >
         <input
@@ -165,8 +165,8 @@ const NoteEditor = React.createClass({
             ref="editor" />
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NoteEditor
+module.exports = NoteEditor;

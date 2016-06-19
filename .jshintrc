@@ -1,0 +1,16 @@
+{
+  "esversion": 6,
+  "undef": true,
+  "unused": "vars",
+  "eqnull": true,
+  "eqeqeq": true,
+  "predef": [ "document" ],
+  "node" : true,
+
+  "curly" : false,
+  "quotmark" : "single",
+
+  "evil": true,
+
+  "maxlen" : false
+}

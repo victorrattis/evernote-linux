@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
-const Dispatcher = require('flux').Dispatcher
+const Dispatcher = require('flux').Dispatcher;
 
-module.exports = new Dispatcher()
+module.exports = new Dispatcher();

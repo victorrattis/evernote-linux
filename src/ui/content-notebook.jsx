@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const SplitPane = require('react-split-pane')
+const React = require('react');
+const SplitPane = require('react-split-pane');
 
-const NotebookHeader = require('./notebook-header')
-const NotebookItem = require('./notebook-item')
-const AppActions = require('../action/app-action')
-const NotebookStore = require('../store/notebook-store')
+const NotebookHeader = require('./notebook-header');
+const NotebookItem = require('./notebook-item');
+const AppActions = require('../action/app-action');
+const NotebookStore = require('../store/notebook-store');
 
 const style = {
   test: {
@@ -26,7 +26,7 @@ const style = {
     padding: 0,
     listStyle: 'none'
   }
-}
+};
 
 let ContentNotebook = React.createClass({
   displayName: 'ContentNotebook',
@@ -34,19 +34,19 @@ let ContentNotebook = React.createClass({
   getInitialState: function () {
     return {
       notebooks: NotebookStore.getNotebooks()
-    }
+    };
   },
 
   componentDidMount: function () {
-    NotebookStore.addChangeListener(this._onChange)
+    NotebookStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount: function () {
-    NotebookStore.removeChangeListener(this._onChange)
+    NotebookStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function () {
-    this.setState({ notebooks: NotebookStore.getNotebooks() })
+    this.setState({ notebooks: NotebookStore.getNotebooks() });
   },
 
   createNotebookItem: function (item, index) {
@@ -56,7 +56,7 @@ let ContentNotebook = React.createClass({
         title={item.name}
         number={item.number}
         onClick={() => AppActions.showNotes(index)} />
-    )
+    );
   },
 
   render: function () {
@@ -69,8 +69,8 @@ let ContentNotebook = React.createClass({
           </ul>
         </div>
       </SplitPane>
-    )
+    );
   }
-})
+});
 
-module.exports = ContentNotebook
+module.exports = ContentNotebook;

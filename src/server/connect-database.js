@@ -1,5 +1,5 @@
 
-const mysql = require('mysql')
+const mysql = require('mysql');
 
 /**
  *
@@ -8,7 +8,7 @@ const mysql = require('mysql')
  * @param {string} password - The password of the database.
  */
 const DatabaseConnect = function (user, password) {
-  let connection
+  let connection;
 
   this.connect = function () {
     connection = mysql.createConnection({
@@ -17,11 +17,11 @@ const DatabaseConnect = function (user, password) {
       user     : user,
       password : password
     });
-  }
+  };
 
   this.query = function (sqlCommand, callback) {
-    connection.query(sqlCommand, callback)
-  }
-}
+    connection.query(sqlCommand, callback);
+  };
+};
 
-module.exports = DatabaseConnect
+module.exports = DatabaseConnect;

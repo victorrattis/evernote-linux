@@ -1,8 +1,9 @@
-'use strict'
+'use strict';
 
-const React = require('react')
+const React = require('react');
 
-const NoteItem = require('./note-item')
+const NoteItem = require('./note-item');
+const AppAction = require('../action/app-action');
 
 let style = {
   default: {
@@ -56,18 +57,18 @@ let style = {
     overflowY: 'auto',
     background: '#f1f1f1'
   }
-}
+};
 
 let NoteScroll = React.createClass({
   displayName: 'NoteScroll',
 
   handleMouseDown: function () {
-    if(this.props.onMouseDown != undefined) {
-      this.props.onMouseDown()
+    if(this.props.onMouseDown !== undefined) {
+      this.props.onMouseDown();
     }
   },
 
-  createNoteItem: function (item, index) {
+  createNoteItem: function (item) {
     return (
       <NoteItem
         key={item.noteId}
@@ -75,14 +76,14 @@ let NoteScroll = React.createClass({
         date={item.updated}
         selected={item.noteId === this.props.selected}
         onMouseDown={ () => {
-            AppAction.selecteNote(item.noteId)
+            AppAction.selecteNote(item.noteId);
           }
         } />
-    )
+    );
   },
 
   render: function () {
-    let notes = this.props.notes || []
+    let notes = this.props.notes || [];
 
     return (
       <div style={style.default}>
@@ -98,8 +99,8 @@ let NoteScroll = React.createClass({
           {notes.map(this.createNoteItem)}
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NoteScroll
+module.exports = NoteScroll;

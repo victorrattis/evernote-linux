@@ -1,7 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const ReactDOM = require('react-dom')
+const React = require('react');
 
 const style = {
   default: {
@@ -18,21 +17,21 @@ const style = {
     width: 'auto',
     WebkitUserDrag: 'none',
   }
-}
+};
 
 let TextInput = React.createClass({
   displayName: 'TextInput',
 
   handleBlur: function () {
-    if(this.props.onBlur != undefined) {
-      this.props.onBlur(this.refs.input.value)
-      this.refs.input.value= ''
+    if(this.props.onBlur !== undefined) {
+      this.props.onBlur(this.refs.input.value);
+      this.refs.input.value= '';
     }
   },
 
   handleKeyPress: function (e) {
     if (e.key === 'Enter') {
-      this.handleBlur()
+      this.handleBlur();
     }
   },
 
@@ -46,8 +45,8 @@ let TextInput = React.createClass({
           onKeyPress = {this.handleKeyPress}
           onBlur={this.handleBlur} />
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = TextInput
+module.exports = TextInput;

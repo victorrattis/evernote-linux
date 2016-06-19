@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react')
+const React = require('react');
 
 const style = {
   div: {
@@ -19,7 +19,7 @@ const style = {
   text: {
     color: '#202424'
   }
-}
+};
 
 let TagLabel = React.createClass({
   displayName: 'TagLabel',
@@ -29,8 +29,8 @@ let TagLabel = React.createClass({
       <div style={style.div}>
         <span style={style.text}>{this.props.text}</span>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = TagLabel
+module.exports = TagLabel;

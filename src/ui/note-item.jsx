@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const dateFormat = require('dateformat')
-const ObjectAssign = require('object-assign')
+const React = require('react');
+const dateFormat = require('dateformat');
+const ObjectAssign = require('object-assign');
 
 const style = {
   item: {
@@ -47,21 +47,21 @@ const style = {
     left: '12px',
     top: '5px'
   },
-}
+};
 
 let NoteItem = React.createClass({
   displayName: 'NoteItem',
 
   handleMouseDown: function () {
-    if(this.props.onMouseDown != undefined) {
-      this.props.onMouseDown()
+    if(this.props.onMouseDown !== undefined) {
+      this.props.onMouseDown();
     }
   },
 
   render: function () {
-    let inlineStyle =
-      this.props.selected ? ObjectAssign({}, style.item, style.selected) : style.item
-    let updated = dateFormat(new Date(this.props.date), "mmm dd, yyyy")
+    let selected = this.props.selected;
+    let inlineStyle = selected ? ObjectAssign({}, style.item, style.selected) : style.item;
+    let updated = dateFormat(new Date(this.props.date), 'mmm dd, yyyy');
 
     return (
       <div style={inlineStyle} onMouseDown={this.handleMouseDown} >
@@ -72,6 +72,6 @@ let NoteItem = React.createClass({
       </div>
     )
   }
-})
+});
 
-module.exports = NoteItem
+module.exports = NoteItem;

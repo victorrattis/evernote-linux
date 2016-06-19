@@ -7,14 +7,14 @@ const NotebookData = function (database) {
         FROM Notebook
         LEFT JOIN Note
         ON Notebook.notebookId=Note.notebookId
-        GROUP BY Note.notebookId;`
+        GROUP BY Note.notebookId;`;
 
       database.query(sqlCommand, (error, rows) => {
-          if (error) reject(error)
-          else resolve(rows)
-      })
-    })
-  }
-}
+          if (error) reject(error);
+          else resolve(rows);
+      });
+    });
+  };
+};
 
-module.exports = NotebookData
+module.exports = NotebookData;

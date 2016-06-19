@@ -1,9 +1,10 @@
-'use strict'
-const React = require('react')
+'use strict';
 
-const NotebookStore = require('../store/notebook-store')
-const NewNoteButton = require('./new-note-button')
-const AppAction = require('../action/app-action')
+const React = require('react');
+
+const NotebookStore = require('../store/notebook-store');
+const NewNoteButton = require('./new-note-button');
+const AppAction = require('../action/app-action');
 
 const style = {
   default: {
@@ -15,21 +16,17 @@ const style = {
     position: 'relative',
     overflow: 'hidden'
   }
-}
-
-let textStyle = {
-  textAlign: 'center'
-}
+};
 
 let Header = React.createClass({
   displayName: 'Header',
 
   handleMouseDown: function () {
-    AppAction.newNote()
+    AppAction.newNote();
   },
 
   render: function () {
-    let notebook = NotebookStore.getNotebookDefault()
+    let notebook = NotebookStore.getNotebookDefault();
 
     return (
       <div style={style.default}>
@@ -37,8 +34,8 @@ let Header = React.createClass({
           notebook={notebook}
           onMouseDown={this.handleMouseDown} />
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = Header
+module.exports = Header;

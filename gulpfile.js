@@ -1,11 +1,20 @@
-var gulp = require('gulp')
-var babel = require('gulp-babel')
-var less = require('gulp-less')
-var concat = require('gulp-concat')
-var check = require('check-dependencies')
+
+var gulp = require('gulp');
+var babel = require('gulp-babel');
+var less = require('gulp-less');
+var concat = require('gulp-concat');
+var check = require('check-dependencies');
+var jshint = require('gulp-jshint');
 var electron = require('electron-connect').server.create({
   electron:require('electron-prebuilt')
-})
+});
+
+var babelconfig = {
+  presets: [
+    // 'es2015',
+    'react'
+  ]
+};
 
 gulp.task('default', function () {})
 
@@ -14,12 +23,26 @@ gulp.task('libs', function () {
     packageDir:'package.json',
     install: true
   })
-})
+});
+
+gulp.task('lint', ['lint-jsx'], function() {
+  return gulp.src('src/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task('lint-jsx', function() {
+  return gulp.src('src/**/*.jsx')
+    .pipe(babel(babelconfig))
+    .pipe(jshint())
+    // .pipe(jshint({ linter: require('jshint-jsx').JSXHINT }))
+    .pipe(jshint.reporter('default'));
+});
 
 gulp.task('move-html', function () {
   return gulp.src(['src/**/*.+(js|html|css)', '!src/**/*.jsx', '!src/**/*.less', '!src/server/**/*'])
     .pipe(gulp.dest('out'))
-})
+});
 
 gulp.task('build-less', function () {
   var src = 'src/ui/styles/'
@@ -32,13 +55,6 @@ gulp.task('build-less', function () {
 })
 
 gulp.task('build-jsx', ['libs'], function () {
-  var babelconfig = {
-    presets: [
-      // 'es2015',
-      'react'
-    ]
-  }
-
   return gulp.src('src/**/*.jsx')
     .pipe(babel(babelconfig))
     .pipe(gulp.dest('out'))

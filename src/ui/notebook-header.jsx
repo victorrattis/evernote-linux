@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react')
+const React = require('react');
 
 const style = {
   header: {
@@ -35,7 +35,7 @@ const style = {
     paddingRight: '16px',
     paddingTop: '16px'
   }
-}
+};
 
 const NotebookHeader = React.createClass({
   displayName: 'NotebookHeader',
@@ -47,8 +47,8 @@ const NotebookHeader = React.createClass({
           Notebook Header
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NotebookHeader
+module.exports = NotebookHeader;

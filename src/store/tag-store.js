@@ -1,13 +1,13 @@
-'use strict'
+'use strict';
 
-const assign = require('object-assign')
-const EventEmitter = require('events').EventEmitter
-const AppDispatcher = require('../dispatcher/app-dispatcher')
-const Action = require('../action/action')
+const assign = require('object-assign');
+const EventEmitter = require('events').EventEmitter;
+const AppDispatcher = require('../dispatcher/app-dispatcher');
+const Action = require('../action/action');
 
-const CHANGE_EVENT = 'change'
+const CHANGE_EVENT = 'change';
 
-let tags = []
+let tags = [];
 
 let newTagId;
 
@@ -15,45 +15,45 @@ let TagStore = assign({}, EventEmitter.prototype, {
   onUpdate: function (action) {
     switch (action.actionType) {
       case Action.LOAD_APP_DATA:
-        tags = action.data.tags
+        tags = action.data.tags;
         break;
       case Action.ADD_TAG_NOTE:
-        console.log('add tag note: ' + tags.length)
-        newTagId = tags.length
+        console.log('add tag note: ' + tags.length);
+        newTagId = tags.length;
         tags.push({
           id: tags.length,
           name: action.tagInfo.name
-        })
-        break
+        });
+        break;
       default:
     }
   },
 
   emitChange: function () {
-    this.emit(CHANGE_EVENT)
+    this.emit(CHANGE_EVENT);
   },
 
   addChangeListener: function (callback) {
-    this.on(CHANGE_EVENT, callback)
+    this.on(CHANGE_EVENT, callback);
   },
 
   removeChangeListener: function (callback) {
-    this.removeListener(CHANGE_EVENT, callback)
+    this.removeListener(CHANGE_EVENT, callback);
   },
 
   getTags: function () {
-    return tags
+    return tags;
   },
 
   getTag: function (index) {
-    return tags[index]
+    return tags[index];
   },
 
   getNewTag: function () {
-    return newTagId
+    return newTagId;
   }
-})
+});
 
-const TagDispatcherToken = AppDispatcher.register(TagStore.onUpdate)
+AppDispatcher.register(TagStore.onUpdate);
 
-module.exports = TagStore
+module.exports = TagStore;

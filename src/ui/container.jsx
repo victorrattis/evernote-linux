@@ -1,9 +1,10 @@
-'use strict'
-const React = require('react')
-const SplitPane = require('react-split-pane')
+'use strict';
 
-const Sidebar = require('./sidebar')
-const Content = require('./content')
+const React = require('react');
+const SplitPane = require('react-split-pane');
+
+const Sidebar = require('./sidebar');
+const Content = require('./content');
 
 let Container = React.createClass({
   displayName: 'Container',
@@ -14,8 +15,8 @@ let Container = React.createClass({
         <Sidebar />
         <Content />
       </SplitPane>
-    )
+    );
   }
-})
+});
 
-module.exports = Container
+module.exports = Container;

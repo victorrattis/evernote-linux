@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const SidebarItem = require('./sidebar-item')
-const AppActions = require('../action/app-action')
-const AppStore = require('../store/app-store')
+const React = require('react');
+const SidebarItem = require('./sidebar-item');
+const AppActions = require('../action/app-action');
+const AppStore = require('../store/app-store');
 
 let style = {
   sidebar: {
@@ -49,7 +49,7 @@ let style = {
       background: '#484d44'
     }
   }
-}
+};
 
 let SideBar = React.createClass({
   displayName: 'SideBar',
@@ -57,35 +57,35 @@ let SideBar = React.createClass({
   getInitialState: function () {
     return {
       selected: AppStore.getContentId()
-    }
+    };
   },
 
   componentDidMount: function () {
-    AppStore.addChangeListener(this.onChange)
+    AppStore.addChangeListener(this.onChange);
   },
 
   componentWillUnmount: function () {
-    AppStore.removeChangeListener(this.onChange)
+    AppStore.removeChangeListener(this.onChange);
   },
 
   onChange: function () {
-    let selectedContent = AppStore.getContentId()
+    let selectedContent = AppStore.getContentId();
 
     if (this.state.selected !== selectedContent) {
-      this.setState({selected: selectedContent})
+      this.setState({selected: selectedContent});
     }
   },
 
   handleShowNotesClick: function () {
-    AppActions.showNotes('all-notes')
+    AppActions.showNotes('all-notes');
   },
 
   handleShowNotebooksClick: function () {
-    AppActions.showNotebooks()
+    AppActions.showNotebooks();
   },
 
   handleShowTagsClick: function () {
-    AppActions.showTags()
+    AppActions.showTags();
   },
 
   render: function () {
@@ -118,8 +118,8 @@ let SideBar = React.createClass({
             src='../../resources/evernote-logo1.png' />
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = SideBar
+module.exports = SideBar;

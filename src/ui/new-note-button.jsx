@@ -1,8 +1,8 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const dateFormat = require('dateformat')
-const ObjectAssign = require('object-assign')
+const React = require('react');
+// const dateFormat = require('dateformat');
+// const ObjectAssign = require('object-assign');
 
 const style = {
   default: {
@@ -33,27 +33,27 @@ const style = {
     position: 'relative',
     top: '2px'
   }
-}
+};
 
 let NewNoteButton = React.createClass({
   displayName: 'NewNoteButton',
 
   handleMouseDown: function () {
-    if(this.props.onMouseDown != undefined) {
-      this.props.onMouseDown()
+    if(this.props.onMouseDown !== undefined) {
+      this.props.onMouseDown();
     }
   },
 
   render: function () {
-    let notebook = this.props.notebook ? 'in ' + this.props.notebook : ''
+    let notebook = this.props.notebook ? 'in ' + this.props.notebook : '';
 
     return (
       <div style={style.default} onMouseDown={this.handleMouseDown} >
         <img style={style.image} src='../../resources/plus-icon.png' />
         <font style={style.text}>New Note {notebook}</font>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NewNoteButton
+module.exports = NewNoteButton;

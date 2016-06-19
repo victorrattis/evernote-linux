@@ -1,28 +1,29 @@
-'use strict'
-const React = require('react')
+'use strict';
+
+const React = require('react');
 
 let NoteSnippetView = React.createClass({
   displayName: 'NoteSnippetView',
 
   handleMouseDown: function () {
-    if(this.props.onMouseDown != undefined) {
-      this.props.onMouseDown()
+    if(this.props.onMouseDown !== undefined) {
+      this.props.onMouseDown();
     }
   },
 
   render: function () {
-    let title = this.props.title
-    let date = this.props.date
-    let snippet = this.props.snippet
-    let thumbnail
+    let title = this.props.title;
+    let date = this.props.date;
+    let snippet = this.props.snippet;
+    let thumbnail;
 
-    let titleStyle = 'note-title '
-    let snipperStyle = 'note-body '
+    let titleStyle = 'note-title ';
+    let snipperStyle = 'note-body ';
 
     if (this.props.thumbnail !== undefined && this.props.thumbnail !== '') {
-      thumbnail = <img className='note-thumbnail' src={this.props.thumbnail} />
-      titleStyle += 'note-tile-smaller'
-      snipperStyle += 'note-body-smaller'
+      thumbnail = <img className='note-thumbnail' src={this.props.thumbnail} />;
+      titleStyle += 'note-tile-smaller';
+      snipperStyle += 'note-body-smaller';
     }
 
     return (
@@ -43,8 +44,8 @@ let NoteSnippetView = React.createClass({
           </div>
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NoteSnippetView
+module.exports = NoteSnippetView;

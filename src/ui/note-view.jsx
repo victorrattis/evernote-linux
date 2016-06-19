@@ -1,16 +1,16 @@
-'use strict'
+'use strict';
 
-const React = require('react')
-const SplitPane = require('react-split-pane')
-const dateFormat = require('dateformat')
+const React = require('react');
+const SplitPane = require('react-split-pane');
+const dateFormat = require('dateformat');
 
-const NoteEditor = require('./note-editor')
-const TagStore = require('../store/tag-store')
-const NoteStore = require('../store/note-store')
-const NotebookStore = require('../store/notebook-store')
-const TagLabel = require('./tag-label')
-const TextInput = require('./text-input')
-const AppAction = require('../action/app-action')
+const NoteEditor = require('./note-editor');
+const TagStore = require('../store/tag-store');
+const NoteStore = require('../store/note-store');
+const NotebookStore = require('../store/notebook-store');
+const TagLabel = require('./tag-label');
+const TextInput = require('./text-input');
+const AppAction = require('../action/app-action');
 
 const style = {
   default: {
@@ -116,7 +116,7 @@ const style = {
     top: 2,
     cursor: 'pointer',
   }
-}
+};
 
 const NoteView = React.createClass({
   displayName: 'NoteView',
@@ -124,15 +124,15 @@ const NoteView = React.createClass({
   getInitialState: function () {
     return {
       note: {}
-    }
+    };
   },
 
   componentDidMount: function () {
-    NoteStore.addListener('select', this.handleChange)
+    NoteStore.addListener('select', this.handleChange);
   },
 
   componentWillUnmount: function () {
-    NoteStore.removeListener('select', this.handleChange)
+    NoteStore.removeListener('select', this.handleChange);
   },
 
   // shouldComponentUpdate: function (nextProps, nextState) {
@@ -140,15 +140,15 @@ const NoteView = React.createClass({
   // },
 
   handleChange: function () {
-    let note = NoteStore.getCurrentNote()
-    this.setState({note: note})
+    let note = NoteStore.getCurrentNote();
+    this.setState({note: note});
   },
 
   handleBlur: function (text) {
-    if(text != '') {
+    if(text !== '') {
       AppAction.addNewTag(
         { name: text },
-        this.state.note.id)
+        this.state.note.id);
       // this.state.tags[4]={ id: 4, name: text }
       // // this.state.tags.push({ id: this.state.tags.length, name: text })
       // this.setState({state: this.state.tags})
@@ -156,33 +156,33 @@ const NoteView = React.createClass({
   },
 
   dateFormatter: function (date) {
-    if(date == undefined) return ''
-    return dateFormat(new Date(date), "mmm dd, yyyy")
+    if(date === undefined) return '';
+    return dateFormat(new Date(date), 'mmm dd, yyyy');
   },
 
   handleNoteChange: function (info) {
     // if(info.title !== undefined) {
-      AppAction.alterNote(info)
+      AppAction.alterNote(info);
     // }
   },
 
   handleMouseDown: function () {
     if(this.state.note.noteId) {
-      AppAction.deleteNote(this.state.note.noteId)
+      AppAction.deleteNote(this.state.note.noteId);
     }
   },
 
   render: function () {
-    let notebook = NotebookStore.getNotebook(this.state.note.notebookId)
-    let notebookName = (notebook != undefined) ? notebook.name : ''
+    let notebook = NotebookStore.getNotebook(this.state.note.notebookId);
+    let notebookName = (notebook !== undefined) ? notebook.name : '';
 
     // this.noteId = this.state.note.noteId
-    let tagElements = null
-    if(this.state.note.tags != undefined) {
-      tagElements = this.state.note.tags.map(function (item, index) {
-        let tag = TagStore.getTag(item)
-        return <TagLabel key={tag.id} text={tag.name} />
-      })
+    let tagElements = null;
+    if(this.state.note.tags !== undefined) {
+      tagElements = this.state.note.tags.map(function (item) {
+        let tag = TagStore.getTag(item);
+        return <TagLabel key={tag.id} text={tag.name} />;
+      });
     }
 
     return (
@@ -220,8 +220,8 @@ const NoteView = React.createClass({
           </div>
         </SplitPane>
       </div>
-    )
+    );
   }
-})
+});
 
-module.exports = NoteView
+module.exports = NoteView;

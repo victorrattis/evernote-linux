@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-const React = require('react')
+const React = require('react');
 
 const style = {
   div: {
@@ -48,14 +48,14 @@ const style = {
     WebkitUserDrag: 'none',
     WebkitUserSelect: 'none'
   }
-}
+};
 
 let NotebookItem = React.createClass({
   displayName: 'NotebookItem',
 
   handleClick: function () {
     if (this.props.onClick !== undefined) {
-      this.props.onClick()
+      this.props.onClick();
     }
   },
 
@@ -71,8 +71,8 @@ let NotebookItem = React.createClass({
           </div>
         </div>
       </li>
-    )
+    );
   }
-})
+});
 
-module.exports = NotebookItem
+module.exports = NotebookItem;
