@@ -1,24 +1,15 @@
-'use strict';
 
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = require('browser-window');
+const {app, BrowserWindow} = electron;
 
-let mainWindow = null;
+let mainWindow;
 
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
-let newWindow = () => {
-  const atomScreen = require('screen');
-  const size = atomScreen.getPrimaryDisplay().workAreaSize;
+function createWindow() {
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
 
   mainWindow = new BrowserWindow({
-    width: size.width,
-    height: size.height,
+    width: width,
+    height: height,
     'min-width': 650,
     'min-height': 400,
     frame: true
@@ -29,16 +20,18 @@ let newWindow = () => {
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
-};
+}
 
-// OSX only callback - takes care of spawning
-// a new app window if needed
-app.on('activate', function () {
-  if (mainWindow === null) {
-    newWindow();
+app.on('ready', createWindow);
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
   }
 });
 
-app.on('ready', function () {
-  newWindow();
+app.on('activate', () => {
+  if (mainWindow === null) {
+    createWindow();
+  }
 });

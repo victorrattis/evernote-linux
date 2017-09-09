@@ -18,10 +18,11 @@ let handleGetNotebooks = () => {};
 let handleNewNote = () => {};
 
 // Events
-socket.on('connect',       () => {
-                             console.log('connect');
-                             AppAction.appConnected();
-                           });
+socket.on('connect', () => {
+    console.log('connect');
+    AppAction.appConnected();
+});
+
 socket.on('disconnect',    () => console.log('disconnect!'));
 socket.on('get-notes',     (notes) => handleGetNotes(notes));
 socket.on('get-notebooks', (notebooks) => handleGetNotebooks(notebooks));

@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = function AutoSave (callback, delay) {
   let timer = 0;

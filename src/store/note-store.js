@@ -1,24 +1,20 @@
-'use strict';
 
-const assign = require('object-assign');
-const EventEmitter = require('events').EventEmitter;
-const dateFormat = require('dateformat');
-const AppDispatcher = require('../dispatcher/app-dispatcher');
-const Action = require('../action/action');
-// const TagStore = require('../store/tag-store');
-const AppClient = require('../client/app-client');
-const AutoSave = require('../utils/auto-save');
-
-const convertToRaw = require('draft-js').convertToRaw;
+// Module requires
+const assign             = require('object-assign');
+const { EventEmitter }   = require('events');
+const dateFormat         = require('dateformat');
+const AppDispatcher      = require('../dispatcher/app-dispatcher');
+const Action             = require('../action/action');
+const AppClient          = require('../client/app-client');
+const AutoSave           = require('../utils/auto-save');
+const { convertToRaw }   = require('draft-js');
 
 let notes = [];
 
 // Represents unsaved data. The data that the User has changed and that weren't saved on the server.
 let unsaved = [];
 
-// let indexSelected;
 let selected;
-let idSelected = 1;
 
 const CHANGE_EVENT = 'change';
 const SELECT_EVENT = 'select';
@@ -31,15 +27,16 @@ let NoteStore = assign({}, EventEmitter.prototype, {
         break;
       case Action.APP_INIT:
         // Get all notes saves on server.
-        AppClient.getNotes((_notes) => {
-          notes = _notes;
-          unsaved.forEach((item) => { notes.push(item.refNote); });
-          selected = notes[0];
-          idSelected = selected.noteId;
+        AppClient.getNotes(_notes => {
+          if(Array.isArray(_notes)) {
+            _notes.forEach(item => notes.push(item));
+            unsaved.forEach(item => notes.push(item.refNote));
+            selected = notes[0];
 
-          // TODO: remove it later.
-          NoteStore.emitChange();
-          NoteStore.emitSelect();
+            // TODO: remove it later.
+            NoteStore.emitChange();
+            NoteStore.emitSelect();
+          }
         });
         break;
       case Action.SHOW_NOTE_CONTENT:
@@ -50,7 +47,6 @@ let NoteStore = assign({}, EventEmitter.prototype, {
         let noteSelected = notes.find((item) => item && item.noteId === action.noteId);
 
         if(noteSelected) {
-          idSelected = noteSelected.noteId;
           selected = noteSelected;
           NoteStore.emitSelect();
           NoteStore.emitChange();
@@ -67,9 +63,8 @@ let NoteStore = assign({}, EventEmitter.prototype, {
 
         notes.push(newNote);
         selected = newNote;
-        idSelected = newNote.noteId;
 
-        unsaved.push({noteId: idSelected, refNote: newNote, status: 'new'});
+        unsaved.push({noteId: newNote.noteId, refNote: newNote, status: 'new'});
         autoSave.save();
 
         NoteStore.emitChange();
@@ -112,7 +107,6 @@ let NoteStore = assign({}, EventEmitter.prototype, {
         // Set the selected note index.
         let selectedIndex = notes[index] ? index : notes[index - 1] ? index - 1 : -1;
 
-        idSelected = selectedIndex >= 0 ? notes[selectedIndex].noteId : -1;
         selected = selectedIndex >= 0 ? notes[selectedIndex] : {};
 
         let register = unsaved.find((item) => item.noteId === action.noteId);
@@ -177,7 +171,7 @@ let NoteStore = assign({}, EventEmitter.prototype, {
   },
 
   getgetIdSelected: function () {
-    return idSelected;
+    return selected ? selected.noteId : -1;
   }
 });
 

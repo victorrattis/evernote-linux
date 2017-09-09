@@ -4,8 +4,6 @@ const assign = require('object-assign');
 const EventEmitter = require('events').EventEmitter;
 const AppDispatcher = require('../dispatcher/app-dispatcher');
 const Action = require('../action/action');
-// const AppActions = require('../action/app-action');
-// const AppClient = require('../client/app-client');
 
 const CHANGE_EVENT = 'change';
 
