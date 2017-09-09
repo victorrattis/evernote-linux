@@ -92,22 +92,22 @@ let SideBar = React.createClass({
     return (
       <div style={style.sidebar}>
         <SidebarItem
-          imgNormal='../../resources/note-normal-gray.png'
-          imgSelected='../../resources/note-normal-white.png'
+          imgNormal='../../../res/note-normal-gray.png'
+          imgSelected='../../../res/note-normal-white.png'
           style={style.item}
           onClick={this.handleShowNotesClick}
           enabled={this.state.selected === 'notes'} />
 
         <SidebarItem
-          imgNormal='../../resources/notebook-normal-gray.png'
-          imgSelected='../../resources/notebook-normal-white.png'
+          imgNormal='../../../res/notebook-normal-gray.png'
+          imgSelected='../../../res/notebook-normal-white.png'
           style={style.item}
           onClick={this.handleShowNotebooksClick}
           enabled={this.state.selected === 'notebooks'} />
 
         <SidebarItem
-          imgNormal='../../resources/tag-normal-gray.png'
-          imgSelected='../../resources/tag-normal-white.png'
+          imgNormal='../../../res/tag-normal-gray.png'
+          imgSelected='../../../res/tag-normal-white.png'
           style={style.item}
           onClick={this.handleShowTagsClick}
           enabled={this.state.selected === 'tags'} />
@@ -115,7 +115,7 @@ let SideBar = React.createClass({
         <div style={style.logo}>
           <img
             style={style.unselectable}
-            src='../../resources/evernote-logo1.png' />
+            src='../../../res/evernote-logo1.png' />
         </div>
       </div>
     );

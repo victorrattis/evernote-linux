@@ -49,7 +49,7 @@ let NewNoteButton = React.createClass({
 
     return (
       <div style={style.default} onMouseDown={this.handleMouseDown} >
-        <img style={style.image} src='../../resources/plus-icon.png' />
+        <img style={style.image} src='../../../res/plus-icon.png' />
         <font style={style.text}>New Note {notebook}</font>
       </div>
     );

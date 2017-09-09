@@ -46,11 +46,11 @@ const NoteHeader = React.createClass({
       <div style={style.header}>
         <div style={style.title}>
           {title}
-          <img style={style.arrow} src='../../resources/arrow2.png' />
+          <img style={style.arrow} src='../../../res/arrow2.png' />
         </div>
 
         <div style={style.tag} >
-          <img src='../../resources/new_tag_grey.png' />
+          <img src='../../../res/new_tag_grey.png' />
         </div>
       </div>
     );

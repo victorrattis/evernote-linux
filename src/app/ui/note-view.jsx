@@ -191,18 +191,18 @@ const NoteView = React.createClass({
           <div style={style.header}>
             <SplitPane split='vertical' defaultSize={'auto'} className='primary'>
               <div style={style.notebookIcon}>
-                <img style={style.image} src='../../resources/notebook-icon.png' />
+                <img style={style.image} src='../../../res/notebook-icon.png' />
                 <span style={style.span}>{notebookName}</span>
               </div>
               <div style={style.notebookIcon}>
-                <img style={style.image} src='../../resources/tag-icon.png' />
+                <img style={style.image} src='../../../res/tag-icon.png' />
                 {tagElements}
                 <TextInput  onBlur={this.handleBlur} />
               </div>
             </SplitPane>
 
             <div style={style.delete} onMouseDown={this.handleMouseDown} >
-              <img src='../../resources/delete-icon.png' />
+              <img src='../../../res/delete-icon.png' />
             </div>
           </div>
           <div>

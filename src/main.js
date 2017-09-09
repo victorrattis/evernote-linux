@@ -15,7 +15,7 @@ function createWindow() {
     frame: true
   });
 
-  mainWindow.loadURL(`file://${__dirname}/ui/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/app/ui/index.html`);
 
   mainWindow.on('closed', function () {
     mainWindow = null;
