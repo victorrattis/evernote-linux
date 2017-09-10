@@ -1,3 +1,4 @@
+'use strict'
 
 const NoteData = require('./note-data');
 const NotebookData = require('./notebook-data');

@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * Describe the action identifies the action that occurs in the application.
  */

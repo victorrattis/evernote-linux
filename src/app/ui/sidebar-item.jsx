@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const React = require('react');
 const ObjectAssign = require('object-assign');
@@ -13,7 +13,7 @@ const style = {
     WebkitUserDrag: 'none',
     WebkitUserSelect: 'none'
   }
-};
+}
 
 let SidebarItem = React.createClass({
   displayName: 'SidebarItem',
@@ -30,12 +30,12 @@ let SidebarItem = React.createClass({
   },
 
   shouldComponentUpdate: function (nextProps, nextState) {
-    return nextProps.enabled !== this.props.enabled;
+    return nextProps.enabled !== this.props.enabled
   },
 
   mouseClick: function () {
     if (this.props.onClick !== undefined) {
-      this.props.onClick();
+      this.props.onClick(this.props.action)
     }
   },
 
@@ -45,20 +45,17 @@ let SidebarItem = React.createClass({
       style.div,
       this.props.style.default,
       this.props.enabled ? this.props.style.normal : this.props.style.selected
-    );
-    let imageSource = this.props.enabled ? this.props.imgSelected : this.props.imgNormal;
+    )
+    let imageSource = this.props.enabled ? this.props.imgSelected : this.props.imgNormal
 
     return (
       <div style={inlineStyle}
-        onMouseOver={this.mouseOver}
-        onMouseOut={this.mouseOut}
-        onClick={this.mouseClick} >
-        <img
-          style={style.unselectable}
+          onClick={this.mouseClick} >
+        <img style={style.unselectable}
           src={imageSource} />
       </div>
-    );
+    )
   }
-});
+})
 
-module.exports = SidebarItem;
+module.exports = SidebarItem

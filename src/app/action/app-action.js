@@ -4,6 +4,8 @@ const AppDispatcher = require('../dispatcher/app-dispatcher');
 const Action = require('./action');
 
 let AppActions = {
+  sendAction: (action) => AppDispatcher.dispatch(action),
+
   initApp: () => AppDispatcher.dispatch({
     actionType: Action.APP_INIT
   }),

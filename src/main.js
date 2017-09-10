@@ -1,11 +1,12 @@
+'use strict'
 
-const electron = require('electron');
-const {app, BrowserWindow} = electron;
+const electron = require('electron')
+const { app, BrowserWindow } = electron
 
-let mainWindow;
+let mainWindow
 
-function createWindow() {
-  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
+app.on('ready', () => {
+  const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize
 
   mainWindow = new BrowserWindow({
     width: width,
@@ -13,25 +14,23 @@ function createWindow() {
     'min-width': 650,
     'min-height': 400,
     frame: true
-  });
+  })
 
-  mainWindow.loadURL(`file://${__dirname}/app/ui/index.html`);
+  mainWindow.loadURL(`file://${__dirname}/app/ui/index.html`)
 
   mainWindow.on('closed', function () {
-    mainWindow = null;
-  });
-}
-
-app.on('ready', createWindow);
+    mainWindow = null
+  })
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    app.quit()
   }
-});
+})
 
 app.on('activate', () => {
   if (mainWindow === null) {
-    createWindow();
+    app.emit('ready')
   }
-});
+})

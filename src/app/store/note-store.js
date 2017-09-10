@@ -1,3 +1,4 @@
+'use strict'
 
 // Module requires
 const assign             = require('object-assign');
